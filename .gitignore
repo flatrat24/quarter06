@@ -1,0 +1,10 @@
+# Literally have no idea how this works
+# https://stackoverflow.com/questions/5241644/using-gitignore-to-ignore-everything-but-specific-directories#comment73517182_35836656
+/*/
+!/*
+/*/*
+!/*/notes/
+!/xlatex
+!/xlatex/*
+
+!info.json

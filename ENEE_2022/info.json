@@ -1,0 +1,21 @@
+{
+  "schedule": {
+    "start": 1200,
+    "end": 1300,
+    "days": "Mon Wed Fri",
+    "labStart": 900,
+    "labEnd": 1200,
+    "labDays": "Tue"
+  },
+
+  "name": {
+    "title": "Circuits II",
+    "short": "ENEE 2022",
+    "code": "ENEE",
+    "number": "2022"
+  },
+
+  "bookmarks": { },
+
+  "hasLab": true
+}

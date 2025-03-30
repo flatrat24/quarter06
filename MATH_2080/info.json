@@ -1,0 +1,21 @@
+{
+  "schedule": {
+    "start": 1000,
+    "end": 1200,
+    "days": "Mon Wed",
+    "labStart": 1100,
+    "labEnd": 1200,
+    "labDays": "Fri"
+  },
+
+  "name": {
+    "title": "Calculus with Several Variables",
+    "short": "MATH 2080",
+    "code": "MATH",
+    "number": "2080"
+  },
+
+  "bookmarks": { },
+
+  "hasLab": true
+}

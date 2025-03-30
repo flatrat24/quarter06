@@ -1,0 +1,21 @@
+{
+  "schedule": {
+    "start": 1400,
+    "end": 1530,
+    "days": "Mon Wed",
+    "labStart": 1500,
+    "labEnd": 1800,
+    "labDays": "Tue"
+  },
+
+  "name": {
+    "title": "Instrumentation and Data Acquisition",
+    "short": "ENGR 3100",
+    "code": "ENGR",
+    "number": "3100"
+  },
+
+  "bookmarks": { },
+
+  "hasLab": true
+}

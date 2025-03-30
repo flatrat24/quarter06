@@ -1,0 +1,18 @@
+{
+  "schedule": {
+    "start": 1000,
+    "end": 1100,
+    "days": "Thu"
+  },
+
+  "name": {
+    "title": "Engineering Assessment",
+    "short": "ENGR 2950",
+    "code": "ENGR",
+    "number": "2950"
+  },
+
+  "bookmarks": { },
+
+  "hasLab": false
+}

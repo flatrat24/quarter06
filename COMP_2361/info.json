@@ -1,0 +1,18 @@
+{
+  "schedule": {
+    "start": 1600,
+    "end": 1800,
+    "days": "Mon Wed"
+  },
+
+  "name": {
+    "title": "Systems I",
+    "short": "COMP 2361",
+    "code": "COMP",
+    "number": "2361"
+  },
+
+  "bookmarks": { },
+
+  "hasLab": false
+}

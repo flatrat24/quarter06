@@ -1,0 +1,237 @@
+%%%% GRAPHICS %%%%
+\usepackage{tikz}
+\usepackage[siunitx, american, RPvoltages]{circuitikz}
+\usetikzlibrary{arrows.meta}
+\usepackage{tikz-3dplot}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+  \pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows}
+\newcommand{\midarrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
+
+%%%% FIGURES %%%%
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage[skip=5pt, font=footnotesize]{caption}
+
+%%%% FORMATTING %%%%
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{ulem}
+
+%%%% TABLE FORMATTING %%%%
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs}
+
+%%%% MATH AND LOGIC %%%%
+\usepackage{xifthen}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+%%%% TEXT AND SYMBOLS %%%%
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{gensymb}
+
+%%%% OTHER %%%%
+\usepackage{standalone}
+
+%%%% LOGIC SYMBOLS %%%%
+\newcommand*\xor{\oplus}
+
+%%%% STYLES %%%%
+
+% Packages
+\usepackage[paper=letterpaper,tmargin=45pt,bmargin=45pt,lmargin=45pt,rmargin=45pt]{geometry}
+\usepackage{titlesec}
+\usepackage[rgb]{xcolor}
+\selectcolormodel{natural}
+\usepackage{ninecolors}
+\selectcolormodel{rgb}
+
+% Colors
+\definecolor{pg}{HTML}{24273A}
+\definecolor{fg}{HTML}{FFFFFF}
+\definecolor{bg}{HTML}{24273A}
+\definecolor{re}{HTML}{F38BA8}
+\definecolor{gr}{HTML}{A6E3A1}
+\definecolor{ye}{HTML}{F9E2AF}
+\definecolor{or}{HTML}{FAB387}
+\definecolor{bl}{HTML}{89B4FA}
+\definecolor{ma}{HTML}{CBA6F7}
+\definecolor{cy}{HTML}{94E2D5}
+\definecolor{pi}{HTML}{F2CDCD}
+
+\definecolor{copper}{HTML}{B87333}
+
+\usepackage{nameref}
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+\titleformat{\section}
+  {\normalfont\scshape\Large\bfseries}
+  {\thesection}
+  {0.75em}
+  {}
+
+\titleformat{\subsection}
+  {\normalfont\scshape\large\bfseries}
+  {\thesubsection}
+  {0.75em}
+  {}
+
+\titleformat{\subsubsection}
+  {\normalfont\scshape\normalsize\bfseries}
+  {\thesubsubsection}
+  {0.75em}
+  {}
+
+% Formula
+\newcounter{formula}[section]
+\newenvironment{formula}[1]{
+  \stepcounter{formula}
+  \begin{tcolorbox}[
+    standard jigsaw, % Allows opacity
+    colframe={fg},
+    boxrule=1px,
+    colback=bg,
+    opacityback=0,
+    sharp corners,
+    sidebyside,
+    righthand width=18px,
+    coltext={fg}
+  ]
+  \centering
+  \textbf{\uline{#1}}
+}{
+  \tcblower
+  \textbf{\thesection.\theformula}
+  \end{tcolorbox}
+}
+
+% Definition
+\newcounter{definition}[section]
+
+\newenvironment{definition*}[1]{
+  \begin{tcolorbox}[
+    standard jigsaw, % Allows opacity
+    colframe={fg},
+    boxrule=1px,
+    colback=bg,
+    opacityback=0,
+    sharp corners,
+    coltext={fg}
+  ]
+  \textbf{#1 \hfill}
+  \vspace{5px}
+  \hrule
+  \vspace{5px}
+  \noindent
+}{
+  \end{tcolorbox}
+}
+
+\newenvironment{definition}[1]{
+  \stepcounter{definition}
+  \begin{tcolorbox}[
+    standard jigsaw, % Allows opacity
+    colframe={fg},
+    boxrule=1px,
+    colback=bg,
+    opacityback=0,
+    sharp corners,
+    coltext={fg}
+  ]
+  \textbf{#1 \hfill \thesection.\thedefinition}
+  \vspace{5px}
+  \hrule
+  \vspace{5px}
+  \noindent
+}{
+  \end{tcolorbox}
+}
+
+% Example Problem
+\newcounter{example}[section]
+\newenvironment{example}[1]{
+  \stepcounter{example}
+  \begin{tcolorbox}[
+    standard jigsaw, % Allows opacity
+    colframe={fg},
+    boxrule=1px,
+    colback=bg,
+    opacityback=0,
+    sharp corners,
+    coltext={fg}
+  ]
+  \textbf{Example - #1 \hfill \thesection.\theexample}
+  \vspace{5px}
+  \hrule
+  \vspace{5px}
+  \noindent
+}{
+  \end{tcolorbox}
+}
+
+\tikzset{
+  % Electrical/Computer Engineering
+  wire/.style = {
+    draw = fg,
+    thick
+  }
+
+  % Mechanical Engineering
+  body/.style = {
+    fill = bl!25!bg,
+    draw = fg,
+    thick,
+    fill opacity = 0.8
+  },
+  force/.style = {
+    draw = re,
+    ultra thick,
+    -stealth
+  },
+  dimension/.style = {
+    draw = fg,
+    thick,
+    |-|
+  },
+  support/.style = {
+    fill = brown!50!bg,
+    draw = brown!50!bg,
+    ultra thick
+  },
+  line/.style = {
+    draw = fg,
+    thick
+  }
+}
+
+\pgfplotsset{
+  basicAxis/.style={
+    grid,
+    major grid style={line width=.2pt,draw=fg!50!bg},
+    axis lines = box,
+    axis line style = {line width = 1px},
+  }
+}
+
+%%%% REFERENCES %%%%
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks  = true,
+  linkcolor   = bl,
+  anchorcolor = bl,
+  citecolor   = bl,
+  filecolor   = bl,
+  menucolor   = bl,
+  runcolor    = bl,
+  urlcolor    = bl,
+}
+
+\author{Ethan Anthony}
+\newcommand*{\equal}{=}
