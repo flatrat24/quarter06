@@ -1,4 +1,4 @@
-%%%% GRAPHICS %%%%
+%%--- GRAPHICS ---%%
 \usepackage{tikz}
 \usepackage[siunitx, american, RPvoltages]{circuitikz}
 \usetikzlibrary{arrows.meta}
@@ -8,40 +8,72 @@
   \pgfplotsset{compat=1.18}
 \usetikzlibrary{arrows}
 \newcommand{\midarrow}{\tikz \draw[-triangle 90] (0,0) -- +(.1,0);}
+\tikzset{
+  every pin/.style={draw=fg,fill=fg!10!bg,rectangle,rounded corners=3pt},
+  every pin edge/.style={thick, fg, <-},
+  >=stealth
+}
 
-%%%% FIGURES %%%%
+%%--- Font Options ---%%
+\usepackage{inconsolata} % Monospace font
+
+%%--- Code Formatting ---%%
+\usepackage{listings}
+\lstdefinestyle{catppuccin}{
+  backgroundcolor   = \color{fg!5!bg},  % colour for the background. External color or xcolor package needed.
+  commentstyle      = \color{gr},       % style of comments in source language
+  keywordstyle      = \color{ma},       % style of keywords in source language (e.g. keywordstyle=\color{red})
+  numberstyle       = \color{fg!50!bg}, % style used for line-numbers
+  numbersep         = 5pt,              % distance of line-numbers from the code
+  stringstyle       = \color{or},       % style of strings in source language
+  basicstyle        = \ttfamily\small,  % font size, font family, etc
+  breakatwhitespace = false,            % sets if automatic breaks should only happen at whitespaces
+  breaklines        = true,             % automatic line-breaking
+  captionpos        = b,                % position of caption (t/b)
+  keepspaces        = true,             % keep spaces in the code, useful for indetation
+  numbers           = left,             % position of line numbers (left/right/none, i.e. no line numbers)
+  showspaces        = false,            % emphasize spaces in code (true/false)
+  showstringspaces  = false,            % emphasize spaces in strings (true/false)
+  showtabs          = false,            % emphasize tabulators in code (true/false)
+  tabsize           = 2,                % default tabsize
+  frame             = leftline,         % showing frame outside code (none/leftline/topline/bottomline/lines/single/shadowbox)
+  rulecolor         = \color{fg}        % Specify the colour of the frame-box
+}
+\lstset{style=catppuccin}
+
+%%--- FIGURES ---%%
 \usepackage{subcaption}
 \usepackage{wrapfig}
 \usepackage{float}
 \usepackage[skip=5pt, font=footnotesize]{caption}
 
-%%%% FORMATTING %%%%
+%%--- FORMATTING ---%%
 \usepackage{parskip}
 \usepackage{tcolorbox}
 \usepackage{ulem}
 
-%%%% TABLE FORMATTING %%%%
+%%--- TABLE FORMATTING ---%%
 \usepackage{tabularray}
 \UseTblrLibrary{booktabs}
 
-%%%% MATH AND LOGIC %%%%
+%%--- MATH AND LOGIC ---%%
 \usepackage{xifthen}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 
-%%%% TEXT AND SYMBOLS %%%%
+%%--- TEXT AND SYMBOLS ---%%
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{gensymb}
 
-%%%% OTHER %%%%
+%%--- OTHER ---%%
 \usepackage{standalone}
 
-%%%% LOGIC SYMBOLS %%%%
+%%--- LOGIC SYMBOLS ---%%
 \newcommand*\xor{\oplus}
 
-%%%% STYLES %%%%
+%%--- STYLES ---%%
 
 % Packages
 \usepackage[paper=letterpaper,tmargin=45pt,bmargin=45pt,lmargin=45pt,rmargin=45pt]{geometry}
@@ -72,22 +104,22 @@
 \makeatother
 
 \titleformat{\section}
-  {\normalfont\scshape\Large\bfseries}
-  {\thesection}
-  {0.75em}
-  {}
+{\normalfont\scshape\Large\bfseries}
+{\thesection}
+{0.75em}
+{}
 
 \titleformat{\subsection}
-  {\normalfont\scshape\large\bfseries}
-  {\thesubsection}
-  {0.75em}
-  {}
+{\normalfont\scshape\large\bfseries}
+{\thesubsection}
+{0.75em}
+{}
 
 \titleformat{\subsubsection}
-  {\normalfont\scshape\normalsize\bfseries}
-  {\thesubsubsection}
-  {0.75em}
-  {}
+{\normalfont\scshape\normalsize\bfseries}
+{\thesubsubsection}
+{0.75em}
+{}
 
 % Formula
 \newcounter{formula}[section]
@@ -103,12 +135,12 @@
     sidebyside,
     righthand width=18px,
     coltext={fg}
-  ]
-  \centering
-  \textbf{\uline{#1}}
-}{
-  \tcblower
-  \textbf{\thesection.\theformula}
+    ]
+    \centering
+    \textbf{\uline{#1}}
+  }{
+    \tcblower
+    \textbf{\thesection.\theformula}
   \end{tcolorbox}
 }
 
@@ -124,13 +156,13 @@
     opacityback=0,
     sharp corners,
     coltext={fg}
-  ]
-  \textbf{#1 \hfill}
-  \vspace{5px}
-  \hrule
-  \vspace{5px}
-  \noindent
-}{
+    ]
+    \textbf{#1 \hfill}
+    \vspace{5px}
+    \hrule
+    \vspace{5px}
+    \noindent
+  }{
   \end{tcolorbox}
 }
 
@@ -144,13 +176,13 @@
     opacityback=0,
     sharp corners,
     coltext={fg}
-  ]
-  \textbf{#1 \hfill \thesection.\thedefinition}
-  \vspace{5px}
-  \hrule
-  \vspace{5px}
-  \noindent
-}{
+    ]
+    \textbf{#1 \hfill \thesection.\thedefinition}
+    \vspace{5px}
+    \hrule
+    \vspace{5px}
+    \noindent
+  }{
   \end{tcolorbox}
 }
 
@@ -166,13 +198,13 @@
     opacityback=0,
     sharp corners,
     coltext={fg}
-  ]
-  \textbf{Example - #1 \hfill \thesection.\theexample}
-  \vspace{5px}
-  \hrule
-  \vspace{5px}
-  \noindent
-}{
+    ]
+    \textbf{Example - #1 \hfill \thesection.\theexample}
+    \vspace{5px}
+    \hrule
+    \vspace{5px}
+    \noindent
+  }{
   \end{tcolorbox}
 }
 
@@ -220,7 +252,7 @@
   }
 }
 
-%%%% REFERENCES %%%%
+%%--- REFERENCES ---%%
 \usepackage{hyperref}
 \hypersetup{
   colorlinks  = true,
