@@ -15,7 +15,9 @@
     "number": "2022"
   },
 
-  "bookmarks": { },
+  "bookmarks": {
+    "Canvas Homepage": "https://canvas.du.edu/courses/185469"
+  },
 
   "hasLab": true
 }
