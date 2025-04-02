@@ -1,0 +1,69 @@
+\documentclass[12pt]{article}
+
+\input{../../xlatex/imports/preamble}
+
+\title{Lecture 001}
+\date{March 31, 2025}
+
+\begin{document}
+
+\section{Vectors}
+\label{sec:vectors}
+
+\begin{definition}{Vector}
+  A vector is a quantity that has both a \textbf{magnitude} and a \textbf{direction}.
+\end{definition}
+
+Vectors can exist in an arbitrary number of dimensions. Consider the vector $\overrightarrow{v}$ in Figure \ref{fig:001}. $\overrightarrow{v}$ is a one-dimensional vector seeing as its direction is only defined across a single axis. This vector is thus said to be defined in $\mathbb{R}^1$.
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_001}
+  \caption{One-Dimension Vector}
+  \label{fig:001}
+\end{figure}
+
+Now, consider
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_002}
+  \caption{Two-Dimensional Vector}
+  \label{fig:002}
+\end{figure}
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+    
+def incmatrix(genl1,genl2):
+    m = len(genl1)
+    n = len(genl2)
+    M = None #to become the incidence matrix
+    VT = np.zeros((n*m,1), int)  #dummy variable
+
+    printf("asdlfkjasldkfj")
+    
+    #compute the bitwise xor matrix
+    M1 = bitxormatrix(genl1)
+    M2 = np.triu(bitxormatrix(genl2),1) 
+
+    for i in range(m-1):
+        for j in range(i+1, m):
+            [r,c] = np.where(M2 == M1[i,j])
+            for k in range(len(r)):
+                VT[(i)*n + r[k]] = 1;
+                VT[(i)*n + c[k]] = 1;
+                VT[(j)*n + r[k]] = 1;
+                VT[(j)*n + c[k]] = 1;
+                
+                if M is None:
+                    M = np.copy(VT)
+                else:
+                    M = np.concatenate((M, VT), 1)
+                
+                VT = np.zeros((n*m,1), int)
+    
+    return M
+\end{lstlisting}
+
+\end{document}

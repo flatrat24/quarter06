@@ -15,7 +15,10 @@
     "number": "2080"
   },
 
-  "bookmarks": { },
+  "bookmarks": {
+    "Canvas Homepage": "https://canvas.du.edu/courses/186466",
+    "Gradescope": "https://www.gradescope.com/courses/920761"
+  },
 
   "hasLab": true
 }

@@ -1,0 +1,42 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 002}
+\date{March 31, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+
+  \begin{axis}[
+    legend pos=south west,
+    axis line style = thick,
+    axis x line=middle,
+    axis y line=middle,
+    yticklabel=\empty,
+    xticklabel=\empty,
+    grid = major,
+    grid style={dashed, fg!25!bg},
+    axis background/.style={fill=bg},
+    xlabel=$x$,
+    ylabel=$y$,
+    tick align=outside,
+    xmin=-6.5,
+    xmax= 6.5,
+    ymin=-6.5,
+    ymax= 6.5,
+  ]
+
+  \addplot [
+    domain=2:4,
+    samples=2,
+    color=fg,
+    thick,
+    |->
+  ] {x};
+
+  \addplot[mark=*] coordinates {(0,1)} node[pin=150:{$(0,1)$}]{} ;
+
+  \end{axis}
+
+\end{tikzpicture}
+\end{document}

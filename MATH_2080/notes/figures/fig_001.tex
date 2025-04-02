@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 001}
+\date{March 31, 2025}
+
+\begin{document}
+\begin{tikzpicture}[scale=2]
+
+  \draw[line, ultra thick, <->] (0,0) -- ++(5,0);
+
+  \foreach \x in {0.5,1,...,4.5} {
+    \pgfmathsetmacro{\value}{(\x-2.5) * 2}
+    \filldraw[thick, draw=fg, fill=bg] (\x,0) node[anchor=north, yshift = -2pt] {\pgfmathprintnumber{\value}} circle (1.00pt);
+  }
+
+  \draw[line, ultra thick, |->] (1.5,0.2) -- node[anchor=south] {$\overrightarrow{v}$} ++(1,0);
+
+\end{tikzpicture}
+\end{document}
