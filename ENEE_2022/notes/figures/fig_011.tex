@@ -1,0 +1,16 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+\usetikzlibrary{decorations.pathmorphing,patterns}
+
+\title{Figure 011}
+\date{April 04, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+
+  \draw[decoration={aspect=0.3, segment length=5mm, amplitude=10mm,coil},decorate] (0,0) -- ++(6,0);
+
+  \draw[dimension] (0,-1.2) -- node[midway, anchor=north] {$l$} ++(6,0);
+
+\end{tikzpicture}
+\end{document}

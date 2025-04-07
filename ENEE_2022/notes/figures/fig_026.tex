@@ -1,0 +1,33 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 026}
+\date{April 06, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+    axis lines = left,
+    thick,
+    xlabel = Time ($t$),
+    ylabel = Voltage ($v$),
+    xticklabels = {},
+    yticklabels = {},
+    xmax = 10,
+    ymax = 12
+    ]
+    \addplot [
+      domain=0:10,
+      samples=50,
+      color=re,
+      ultra thick,
+      ->
+    ] {10*e^(-x/2)};
+  \end{axis}
+
+  \draw[wire, dashed, draw=fg!75!bg] (1.5,0) node[anchor=north] {$\tau$} -- ++(0,1.5) -- ++(-1.5,0) node[anchor=east] {$\frac{1}{e}V_i$};
+  \draw[fg] (0,4.75) node[anchor=east] {$V_i$};
+  \draw[fg,->,thick] (3.5,2) node[anchor=south] {$V_i e^{-\frac{t}{RC}}$} -- ++(-1,-1);
+
+\end{tikzpicture}
+\end{document}

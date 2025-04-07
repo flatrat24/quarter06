@@ -1,0 +1,243 @@
+\documentclass[12pt]{article}
+
+\input{../../xlatex/imports/preamble}
+
+\title{Lecture 002}
+\date{April 06, 2025}
+
+\begin{document}
+
+\newpage
+\section{First Order Circuits}
+\label{sec:firstOrderCircuits}
+
+Now having the tools to analyze capacitors and inductors, circuits beyond simple resistance-based ones can be analyzed. Previously with circuit consisting of only sources and resistors, applying Kirchoff's Laws resulted in algebraic expressions that represented the circuit.
+
+With capacitors and inductors, applying these same laws will yield differential equations that represent the circuit. Considering that the equation for the current across a capacitor is:
+\begin{equation*}
+  i = C\frac{dv}{dt}
+\end{equation*}
+and the voltage across an inductor is:
+\begin{equation*}
+  v = L\frac{di}{dt}
+\end{equation*}
+any set of equations involving one of these equalities would contain derivatives of the first order at most. Thus, circuits involving a single capacitor or inductor are \textbf{First Order Circuits}.
+
+\begin{definition}{First Order Circuit}
+  A First Order Circuit is a circuit that is characterized by a first order differential equation.
+\end{definition}
+
+\subsection{RC Circuits}
+\label{ssec:rcCircuits}
+
+\begin{wrapfigure}[4]{r}{0.2\textwidth}
+  \centering
+  \includestandalone{figures/fig_024}
+  \caption{RC Circuit}
+  \label{fig:024}
+\end{wrapfigure}
+
+An \textbf{RC Circuit} is a foundational circuit both for its simplicity as well as how widely it is used in practice. The basic configuration of the circuit is seen in Figure \ref{fig:024}.
+
+\begin{definition}{RC Circuit}
+  An RC Circuit is a circuit comprising of a resistor (R) and a capacitor (C).
+\end{definition}
+
+\subsubsection{Source Free RC Circuit}
+\label{sssec:sourceFreeRCCircuit}
+
+\subsubsection{Voltage}
+\label{sssec:sfrccVoltage}
+
+Consider the circuit in Figure \ref{fig:025} where there is no independent voltage source connected in the circuit. There is only a capacitor and a resistor connected in series. Additionally, assume that the capacitor is initially charged (which is where the energy in the circuit will come from).
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_025}
+  \caption{Source Free RC Circuit}
+  \label{fig:025}
+\end{figure}
+
+Applying KCL at the ground node of the circuit, it can be seen that:
+\begin{equation*}
+  {\color{re} i_C} + {\color{gr} i_R} = 0
+\end{equation*}
+By definition:
+\begin{equation*}
+  {\color{re} i_C = C\frac{dv}{dt}}\ \ \ \textup{and}\ \ \ {\color{gr} i_R = \frac{v}{R}}
+\end{equation*}
+Thus, the KCL equation can be expanded to:
+\begin{equation*}
+  \left[{\color{re} C\frac{dv}{dt}} + {\color{gr} \frac{v}{R}} = 0\right] \rightarrow \left[ \frac{dv}{dt} + \frac{v}{CR} = 0 \right]
+\end{equation*}
+Here it should be apparent that this is a first order differential equation. To solve it, first rearrange it:
+\begin{equation*}
+  \left[ \frac{dv}{dt} + \frac{v}{CR} = 0 \right] \rightarrow \left[ \frac{dv}{{\color{or} dt}} = -\frac{{\color{ma} v}}{CR} \right] \rightarrow \left[ {\color{ma} \frac{1}{v}} dv = -\frac{1}{CR} {\color{or} dt} \right]
+\end{equation*}
+Then, integrating both sides:
+\begin{equation*}
+  \left[ {\color{ma} \frac{1}{v}} dv = -\frac{1}{CR} {\color{or} dt} \right] \rightarrow \int \rightarrow \left[ \ln|v| = -\frac{1}{CR} \cdot t + C \right]
+\end{equation*}
+Imagine the integration constant $C$ as being $\ln|A|$. In other words, set $C = \ln|A|$:
+\begin{multline*}
+  \left[ \ln|v| = -\frac{1}{CR} \cdot t + {\color{gr} C} \right] \rightarrow \left[ \ln|v| = -\frac{1}{CR} \cdot t + {\color{gr} \ln|A|} \right] \\ \rightarrow \left[ \ln|v| - {\color{gr} \ln|A|} = -\frac{1}{CR} \cdot t \right] \rightarrow \left[ \ln\left|\frac{v}{A}\right| = -\frac{1}{CR}\cdot t \right]
+\end{multline*}
+Then, exponentiating both sides:
+\begin{equation*}
+  \left[ {\color{ma} \ln\left|\frac{v}{A}\right|} = {\color{or} -\frac{1}{CR}\cdot t} \right] \rightarrow e^x \rightarrow \left[ e^{{\color{ma} \ln\left|\frac{v}{A}\right|}} = e^{{\color{or} \frac{-t}{CR}}} \right] \rightarrow \left[ \frac{v}{{\color{re} A}} = e^{\frac{-t}{CR}} \right] \rightarrow \left[ v = {\color{re} A}e^{\frac{-t}{CR}} \right]
+\end{equation*}
+Considering that the capacitor in the circuit was initially charged, how will that initial charge be represented in the characteristic equation? Recall that $A$ was the integration constant, so based on the initial conditions: $A = v(0) = V_i$. Thus:
+\begin{equation*}
+  \left[ v = Ae^{\frac{-t}{CR}} \right] \rightarrow \left[ v = V_{i}e^{\frac{-t}{CR}} \right]
+\end{equation*}
+This equations is the characteristic equation of a simple, source-free, RC Circuit. Notice the behavior of the equation; starting at $t=0$, the voltage in the circuit is initially $V_i$ and decays exponentially over time.
+\begin{formula}{Characteristic Equation of Source-Free RC Circuit}
+  \begin{equation*}
+    v = V_ie^{-\frac{t}{CR}} = V_ie^{-\frac{t}{\tau}}
+  \end{equation*}
+\end{formula}
+The rate at which the voltage decay is important. It's known that the decay is exponential, but the decay can be described more specifically than just "exponentially". For some exponential function:
+\begin{equation*}
+  e^{\frac{t}{\tau}}
+\end{equation*}
+the function will decay by a factor of $\frac{1}{e}$ every $\tau$ seconds (assuming $t$ is measured in seconds). This value $\tau$ is called the \textbf{time constant}. So, with the function for the RC Circuit:
+\begin{equation*}
+  V_ie^{-\frac{t}{CR}}
+\end{equation*}
+it can be seen that $\tau = CR$.
+
+The voltage of the circuit can be graphed over time to visually see the behavior of the circuit.
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_026}
+  \caption{Voltage Response of the RC Circuit}
+  \label{fig:026}
+\end{figure}
+
+\subsubsection{Power and Energy}
+\label{sssec:sfrccPowerAndEnergy}
+
+Considering the circuit from the perspective of the resistor, by applying Ohm's Law to the voltage function, a similar function to model the current through the circuit can also be derived:
+\begin{equation*}
+  i_R(t) = \frac{v(t)}{R} = \frac{V_i}{R}e^{-\frac{t}{RC}}
+\end{equation*}
+Knowing the $p=vi$, the power dissipated by the resistor is:
+\begin{equation*}
+  p = {\color{re} v} {\color{gr} i_R} = {\color{re} V_ie^{-\frac{t}{RC}}} \cdot {\color{gr} \frac{V_i}{R}e^{-\frac{t}{RC}}} = \frac{V_i^2}{R}e^{-\frac{2t}{RC}}
+\end{equation*}
+and integrating the power dissipated gives the total energy absorbed by the resistor:
+\begin{equation*}
+  w = \frac{V_i^2}{R} \int_{0}^{t}e^{-\frac{2 \lambda}{RC}} \,d \lambda = -\frac{RCV_i^2}{2R}\left[ e^{-\frac{2 \lambda}{RC}} \right]_{0}^{t} = -\frac{CV_i^2}{2}\left(e^{-\frac{2(0)}{RC}}-e^{-\frac{2(t)}{RC}}\right) = -\frac{CV_i^2}{2}\left(1-e^{-\frac{2t}{RC}}\right)
+\end{equation*}
+Notice that as $t \rightarrow \infty$, $w_R \rightarrow \frac{1}{2}CV_i^2$ which is the same as the initial energy stored in the capacitor. This drives home the point that, throughout the life of the circuit, the energy initially stored in the capacitor is being dissipated by the resistor.
+
+\begin{formula}{Energy in a Capacitor}
+  \begin{equation*}
+    w_C = \frac{1}{2}CV_i^2
+  \end{equation*}
+\end{formula}
+
+Since all the behavior of the circuit discussed so far is the behavior of the circuit without external interference (some voltage or current source), this is considered the \textbf{natural response} of the circuit.
+\begin{definition}{Natural Response}
+  The natural response of a circuit refers to the behavior (in terms of voltages and currents) of the circuit itself, with no external sources of excitation.
+\end{definition}
+
+% \begin{figure}[H]
+%   \centering
+%   \includestandalone{figures/fig_023}
+%   \caption{First Order Circuit}
+%   \label{fig:023}
+% \end{figure}
+
+\subsection{RL Circuits}
+\label{ssec:rlCircuits}
+
+\subsubsection{Voltage}
+\label{sssec:sfrlcVoltage}
+
+An \textbf{RL Circuit} occupies a similar space in terms of its simplicity and popularity as the RC Circuit does. Functionally, the only difference is that the RL Circuit uses an inductor where the RC Circuit uses a capacitor.
+
+\begin{definition}{RL Circuit}
+  An RL Circuit is a circuit comprising of a resistor (R) and an inductor (L).
+\end{definition}
+
+\subsubsection{Source Free RL Circuit}
+\label{sssec:sourceFreeRLCircuit}
+
+Consider the circuit in Figure \ref{fig:027}. This circuit is a source free RL circuit seeing as there is an inductor in series with a resistor (RL circuit) and no voltage/current sources (source free).
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_027}
+  \caption{Source Free RL Circuit}
+  \label{fig:027}
+\end{figure}
+
+Applying KVL on the circuit, the following equation can be derived:
+\begin{equation*}
+  {\color{re} v_L} + {\color{gr} v_R} = 0
+\end{equation*}
+By definition:
+\begin{equation*}
+  {\color{re} v_L = L\frac{di}{dt}}\ \ \ \textup{and}\ \ \ {\color{gr} v_R = iR}
+\end{equation*}
+Thus, the KVL equation can be rewritten as:
+\begin{equation*}
+  \left[{\color{re} L\frac{di}{dt}} + {\color{gr} iR} = 0\right] \rightarrow \left[ \frac{di}{dt} + \frac{iR}{L} = 0 \right]
+\end{equation*}
+Just like the previous RC Circuit, the basic RL Circuit is seen to be a first order circuit characterized by its first order differential equation.
+\begin{equation*}
+  \left[ \frac{di}{dt} + \frac{iR}{L} = 0 \right] \rightarrow \left[ \frac{di}{dt} = - \frac{iR}{L} \right] \rightarrow \left[ \frac{1}{i}di = - \frac{R}{L} dt \right]
+\end{equation*}
+Then, integrating both sides:
+\begin{equation*}
+  \left[ \frac{1}{i}di = - \frac{R}{L} dt \right] \rightarrow \int \rightarrow \left[ \ln|i| = -\frac{R}{L} t + C \right]
+\end{equation*}
+Again, setting $C = \ln|A|$:
+\begin{equation*}
+  \left[ \ln|i| = -\frac{R}{L} t + C \right] \rightarrow \left[ \ln|i| = -\frac{R}{L} t + \ln|A| \right] \rightarrow \left[ \ln|i| - \ln|A| = -\frac{R}{L} t \right] \rightarrow \left[ \ln\left|\frac{i}{A}\right| = -\frac{R}{L} t \right]
+\end{equation*}
+Then, exponentiating both sides:
+\begin{equation*}
+  \left[ \ln\left|\frac{i}{A}\right| = -\frac{R}{L} t \right] \rightarrow e^x \rightarrow \left[ e^{\ln\left|\frac{i}{A}\right|} = e^{-\frac{R}{L} t} \right] \rightarrow \left[ \frac{i}{A} = e^{-\frac{R}{L} t} \right] \rightarrow \left[ i = Ae^{-\frac{R}{L} t} \right]
+\end{equation*}
+Again, $A$ represents the initial conditions of the circuit. Previously $A=V_i$ to account for the initial charge built up in the capacitor. Now with the inductor, $A=I_i$ for the initial current in the inductor.
+\begin{equation*}
+  \left[ i = Ae^{-\frac{R}{L} t} \right] \rightarrow \left[ i = I_ie^{-\frac{R}{L} t} \right]
+\end{equation*}
+This now gives the characteristic equation for a source free RL circuit.
+\begin{formula}{Characteristic Equation of a RL Circuit}
+  \begin{equation*}
+    i = I_ie^{-\frac{R}{L}t} = I_ie^{-\frac{t}{\tau}}
+  \end{equation*}
+\end{formula}
+This shows that the RL Circuit still experiences exponential decay after starting with some initial condition ($i=I_i$). However, now the time constant is different, being:
+\begin{equation*}
+  \tau = \frac{L}{R}
+\end{equation*}
+
+\subsubsection{Power and Energy}
+\label{sssec:sfrlcPowerAndEnergy}
+
+What would the voltage drop across the resistor be? By applying Ohm's Law:
+\begin{equation*}
+  v_R = iR = I_ie^{-\frac{t}{\tau}} \cdot R
+\end{equation*}
+Knowing the $p=vi$, the power dissipated by the resistor is:
+\begin{equation*}
+  p = {\color{re} v} {\color{gr} i_R} = {\color{re} I_iRe^{-\frac{t}{\tau}}} \cdot {\color{gr} I_ie^{-\frac{t}{\tau}}} = I_i^2Re^{-\frac{2t}{\tau}}
+\end{equation*}
+then integrating to find the total energy absorbed by the resistor:
+\begin{equation*}
+  w = I_i^2R \int_{0}^{t} e^{-\frac{2 \lambda}{\tau}} \,d \lambda = - \frac{\tau}{2} I_i^2R \left[ e^{-\frac{2 \lambda}{\tau}} \right]_{0}^{t} = - \frac{\tau}{2} I_i^2R \left( e^{-\frac{2(0)}{\tau}}-e^{-\frac{2(t)}{\tau}} \right) = - \frac{\tau}{2} I_i^2R \left( 1-e^{-\frac{2(t)}{\tau}} \right)
+\end{equation*}
+Notice that as $t \rightarrow \infty$, $w_R \rightarrow \frac{1}{2}LI_i^2$ which is the same as the initial energy stored in the inductor. Again, this shows the behavior of the resistor dissipating over time the energy initially stored in the inductor.
+
+\begin{formula}{Energy in a Inductor}
+  \begin{equation*}
+    w_L = \frac{1}{2}LI_i^2
+  \end{equation*}
+\end{formula}
+
+\end{document}

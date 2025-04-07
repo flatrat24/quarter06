@@ -1,0 +1,700 @@
+\documentclass[12pt]{article}
+
+\input{../../xlatex/imports/preamble}
+
+\title{Lecture 001}
+\date{April 03, 2025}
+
+\begin{document}
+
+\section{Capacitors and Inductors}
+\label{sec:capacitorsAndInductors}
+
+Capacitors and inductors \textbf{store} energy rather than dissipate it. Because of this, these circuit elements are useful for creating circuits beyond the simple ones possible with just resistors.
+
+\subsection{Capacitors}
+\label{ssec:capacitors}
+
+\begin{wrapfigure}[7]{r}{0.3\textwidth}
+  \centering
+  \includestandalone{figures/fig_001}
+  \caption{Capacitor}
+  \label{fig:001}
+\end{wrapfigure}
+
+A capacitor is a passive element designed to store energy in its electric field. It's most basic construction is two {\color{bl} conductive plates} separated by an {\color{ye} insulator}. See Figure \ref{fig:001}.
+
+\begin{definition}{Capacitor}
+  A capacitor consists of two conducting plates separated by an insulator (dielectric).
+\end{definition}
+
+When a voltage source is connected to the capacitor, a charge differential is built up between the plates with one plate accumulating a negative charge and the other a positive charge.
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_002}
+  \caption{Capacitor Connected to Voltage Source}
+  \label{fig:002}
+  \vspace{-10pt}
+\end{figure}
+
+The amount of charge accumulated ($q$) is proportional to the voltage ($v$) supplied as well as the capacitance ($C$) of the capacitor:
+
+\begin{formula}{Charge in a Capacitor}
+  \begin{equation*}
+    q = Cv
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Capacitance}
+\label{sssec:capacitance}
+
+\begin{definition}{Capacitance}
+  Capacitance is the ratio of the charge on one plate of a capacitor to the voltage difference between the two plates. The capacitance of a capacitor is measured in Farads ($\si{F}$) where $1 \,\si{F} = \frac{1 \,\si{C}}{1 \,\si{V}}$.
+\end{definition}
+
+The capacitance of a capacitor depends on the physical properties of the capacitors: the area ($A$) of the plates, distance ($d$) between the plates, and the permittivity of the dielectric material ($\epsilon$).
+
+\begin{formula}{Capacitance}
+  \begin{equation*}
+    C = \frac{\epsilon A}{d}
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Types of Capacitors}
+\label{sssec:typesOfCapacitors}
+
+\begin{wrapfigure}[5]{r}{0.4\textwidth}
+  \vspace{-10pt}
+  \centering
+  \begin{subfigure}[H]{0.20\textwidth}
+    \centering
+    \includestandalone{figures/fig_003}
+    \caption{Fixed Value Capacitor}
+    \label{fig:003}
+  \end{subfigure}
+  \begin{subfigure}[H]{0.18\textwidth}
+    \centering
+    \includestandalone{figures/fig_004}
+    \caption{Variable Capacitor}
+    \label{fig:004}
+  \end{subfigure}
+  \caption{Types of Capacitors}
+  \label{fig:typesOfCapacitors}
+\end{wrapfigure}
+
+Capacitors are generally described by 1) the dielectric material and 2) whether they are fixed or variable. The dielectric material used in a capacitor is outside the scope of this course. However, whether a capacitor is variable is important to how the capacitor functions in a circuit.
+
+Similar to resistors, a variable capacitor's capacitance can be changed in real time, usually by turning a knob. It functions the same way a potentiometer does, just with capacitance rather than resistance.
+
+\subsubsection{Voltage and Current Across a Capacitor}
+\label{sssec:voltageAndCurrentAcrossACapacitor}
+
+Recall the formula from Subsection \ref{ssec:capacitors}:
+\begin{equation*}
+  q = Cv
+\end{equation*}
+Additionally, recall that current is nothing more that the movement of charge (in the form of electrons) over time, and thus:
+\begin{equation*}
+  i = \frac{dq}{dt}
+\end{equation*}
+Thus, to find the relationship between current and voltage, simply derive both sides of the formula:
+\begin{equation*}
+  \frac{d}{dt}(q) = \frac{d}{dt}(Cv) \rightarrow i = C \frac{dv}{dt}
+\end{equation*}
+Note that $C$ is simply a constant coefficient of $v$ and thus remains as a coefficient of $\frac{dv}{dt}$. And so the relationship between current and voltage across a capacitor can be modeled as:
+\begin{formula}{Current-Voltage Relationship of a Capacitor}
+  \begin{equation*}
+    i = C \frac{dv}{dt}
+  \end{equation*}
+\end{formula}
+
+Plotting this on a graph (Figure \ref{fig:currentVoltageRelationshipOfACapacitor}), the slope of the line is the value of the capacitance of the capacitor.
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_005}
+  \caption{Current-Voltage Relationship of a Capacitor}
+  \label{fig:currentVoltageRelationshipOfACapacitor}
+\end{figure}
+
+The relationship between the current and voltage over a capacitor can also be modeled in the other direction. That is to say, rather than expressing current in terms of voltage, voltage can be expressed in terms of current:
+\begin{equation*}
+  \left[i = C \frac{dv}{dt}\right] \rightarrow \left[\frac{1}{C}i = \frac{dv}{dt}\right] \rightarrow \left[ \frac{1}{C} \int_{}^{} i \, dt = \int_{}^{} \frac{dv}{dt} \right] \rightarrow \left[ v(t) = \frac{1}{C} \int_{-\infty}^{t} i(\tau) \, d \tau \right]
+\end{equation*}
+Which can be alternatively expressed as:
+\begin{formula}{Voltage-Current Relationship of a Capacitor}
+  \begin{equation*}
+    v(t) = \frac{1}{C} \int_{t_0}^{t} i(\tau) \, d \tau + v(t_0)
+  \end{equation*}
+\end{formula}
+Where $v(t_0)$ is the voltage across the capacitor at time $t_0$. Here, it can be seen that the capacitor has a memory of sorts. At any given time $t$, the voltage across the capacitor will depend in part on the initial voltage $v(t_0)$.
+
+\subsubsection{Power Delivered to a Capacitor}
+\label{sssec:powerDeliveredToACapacitor}
+
+Knowing that the power across some component in a circuit is:
+\begin{equation*}
+  p = {\color{re} v}{\color{gr} i}
+\end{equation*}
+the instantaneous power delivered to a capacitor can be modeled as:
+\begin{equation*}
+  p = {\color{re} v}\cdot{\color{gr} C \frac{dv}{dt}}
+\end{equation*}
+
+Since the energy stored in a capacitor will simply be the accumulation of the energy delivered, integrating the energy delivered over time will give the energy stored:
+
+\begin{equation*}
+  w = \int_{-inf}^{t} p(\tau) \,d \tau = C \int_{-\infty}^{t} v \frac{dv}{d \tau} \, d \tau = C \int_{v(-\infty)}^{v(t)} v \,dv = \left[\frac{1}{2}Cv^2\right]_{v(-\infty)}^{v(t)}
+\end{equation*}
+
+Note that $v(-\infty)=0$ since the capacitor is uncharged at $t=-\infty$:
+\begin{equation*}
+  \left[\frac{1}{2}Cv^2\right]_{v(-\infty)}^{v(t)} = \frac{1}{2}Cv^2
+\end{equation*}
+
+Thus, showing the energy stored in a capacitor:
+\begin{formula}{Energy Stored in a Capacitor}
+  \begin{equation*}
+    w = \frac{1}{2}Cv^2 = \frac{q^2}{2C}
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Capacitors in Series and Parallel}
+\label{sssec:capacitorsInSeriesAndParallel}
+
+Simplifying circuits is a very powerful skill to have to analyze circuits. When dealing with capacitors, how can they be simplified when in series or in parallel. First, capacitors in parallel.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[H]{0.6\textwidth}
+    \centering
+    \includestandalone{figures/fig_008}
+    \caption{Original Circuit}
+    \label{fig:008}
+  \end{subfigure}
+  \begin{subfigure}[H]{0.3\textwidth}
+    \centering
+    \includestandalone{figures/fig_009}
+    \caption{Simplified Circuit}
+    \label{fig:009}
+  \end{subfigure}
+  \caption{Capacitors in Parallel}
+  \label{fig:capacitorsInParallel}
+\end{figure}
+
+Consider the circuit in Figure \ref{fig:008}. How can the capacitors in the circuit be summed to find some capacitance value $C_{eq}$ such that the circuit in Figure \ref{fig:009} is an equivalent circuit?
+
+Applying KCL to the first circuit:
+\begin{equation*}
+  i = i_1 + i_2 + i_3 + \hdots + i_n
+\end{equation*}
+Then, each current can be rewritten according to $i = C \frac{dv}{dt}$ for capacitors:
+\begin{equation*}
+  i = C_1\frac{dv}{dt} + C_2\frac{dv}{dt} + C_3\frac{dv}{dt} + \hdots + C_n\frac{dv}{dt}
+\end{equation*}
+Since all the capacitors are in parallel, the voltages across them all are equal, thus:
+\begin{equation*}
+  i = \frac{dv}{dt}\left(C_1 + C_2 + C_3 + \hdots + C_n\right) = \frac{dv}{dt}\left( \sum_{n=1}^{N} C_n \right) = C_{eq}\frac{dv}{dt}
+\end{equation*}
+where:
+\begin{equation*}
+  C_{eq} = \sum_{n=1}^{N} C_n
+\end{equation*}
+\begin{formula}{Capacitors in Parallel}
+  \begin{equation*}
+    C_{eq} = C_1 + C_2 + C_3 + \hdots + C_n = \sum_{n=1}^{N} C_n
+  \end{equation*}
+\end{formula}
+
+How can capacitors be simplified when in series?
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.6\textwidth}
+    \centering
+    \includestandalone{figures/fig_010}
+    \caption{Original Circuit}
+    \label{fig:010}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includestandalone{figures/fig_009}
+    \caption{Simplified Circuit}
+    \label{fig:009_2}
+  \end{subfigure}
+  \caption{Capacitors in Series}
+  \label{fig:capacitorsInSeries}
+\end{figure}
+
+Consider the circuit in Figure \ref{fig:010}. By applying KVL to the circuit, the voltages can be equated as:
+\begin{equation*}
+  v = v_1 + v_2 + v_3 + \hdots + v_n
+\end{equation*}
+Then, each voltage can be rewritten according to $v = \frac{1}{C} \int_{t_0}^{t} i(\tau) \,d \tau + v(t_0)$:
+\begin{multline*}
+  v = \frac{1}{C_1} \int_{t_0}^{t} t(\tau) \,d \tau + v_1(t_0) + \frac{1}{C_2} \int_{t_0}^{t} t(\tau) \,d \tau + v_2(t_0) + \frac{1}{C_3} \int_{t_0}^{t} t(\tau) \,d \tau + v_3(t_0) \\ + \hdots + \frac{1}{C_4} \int_{t_0}^{t} t(\tau) \,d \tau + v_4(t_0)
+\end{multline*}
+Since the capacitors are in series, the current running through each must be the same. Thus:
+\begin{equation*}
+  v = \left(\sum_{n=1}^{N} C_{n}^{-1}\right) \int_{t_0}^{t} i(\tau) \,d \tau + \big[ v_1(t_0) + v_2(t_0) + v_3(t_0) + \hdots + v_n(t_0) \big] = \frac{1}{C_{eq}}\int_{t_0}^{t} i(\tau) \,d \tau + v(t_0)
+\end{equation*}
+where:
+\begin{equation*}
+  \frac{1}{C_{eq}} = \sum_{n=1}^{N} C_{n}^{-1}
+\end{equation*}
+\begin{formula}{Capacitors in Series}
+  \begin{equation*}
+    C_{eq} = \big(C_{1}^{-1} + C_{2}^{-1} + C_{3}^{-1} + \hdots + C_{n}^{-1}\big)^{-1} = \left(\sum_{n=1}^{N} C_{n}^{-1}\right)^{-1}
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Important Properties of a Capacitor}
+\label{sssec:importantPropertiesOfACapacitor}
+
+Returning to the previous equation:
+\begin{equation*}
+  i = C \frac{dv}{dt}
+\end{equation*}
+a few important properties can be extrapolated from this. Firstly, anytime the voltage across a capacitor is constant (unchanging), the current across that capacitor will be zero. Thus, \textbf{a capacitor is an open circuit under DC conditions}.
+
+Now, consider the graphs in Figure \ref{fig:voltageAcrossACapacitor}. Both plot voltage over time. However, in Figure \ref{fig:006}, the voltage is continuous meaning that $\forall t, \frac{dv}{dt} \in \mathbb{R}$. However, the same cannot be said for Figure \ref{fig:007} since there are points on discontinuities.
+
+\begin{figure}[H]
+  \vspace{-10pt}
+  \begin{subfigure}[H]{0.45\textwidth}
+    \centering
+    \includestandalone{figures/fig_006}
+    \caption{Continuous Voltage}
+    \label{fig:006}
+  \end{subfigure}
+  \begin{subfigure}[H]{0.45\textwidth}
+    \centering
+    \includestandalone{figures/fig_007}
+    \caption{Discontinuous Voltage}
+    \label{fig:007}
+  \end{subfigure}
+  \caption{Voltage Across a Capacitor}
+  \label{fig:voltageAcrossACapacitor}
+\end{figure}
+
+Based on the equation:
+\begin{equation*}
+  i = C \frac{dv}{dt}
+\end{equation*}
+for Figure \ref{fig:007} to be a valid measurement of voltage across a capacitor, the current across that capacitor must be infinite. Clearly, this is not realistic. Thus, another important property of capacitors is that \textbf{voltage across a capacitor cannot change abruptly}.
+
+Lastly, like all components that will be studied theoretically in this course, it is to be assumed that capacitors are \textbf{ideal}, meaning that \textbf{it does not dissipate energy}.
+
+\subsubsection{Summary of Capacitors}
+\label{sssec:summaryOfCapacitors}
+
+In short, a capacitor accumulates a differential of charge between two plates to store energy. The charge is:
+\begin{equation*}
+  q = Cv
+\end{equation*}
+where $C$ is the capacitance of the capacitor, proportional to the area of the plates ($A$), distance between the plates ($d$), and the permittivity of the dielectric ($\epsilon$):
+\begin{equation*}
+  C = \frac{\epsilon A}{d}
+\end{equation*}
+The relationship between the voltage and current across a capacitor can be expressed as:
+\begin{equation*}
+  i = C \frac{dv}{dt}\ \ \ \textup{or}\ \ \ v(t) = \frac{1}{C}\int_{t_0}^{t} i(\tau) \,d \tau + v(t_0)
+\end{equation*}
+The energy stored in a capacitor is:
+\begin{equation*}
+  w = \frac{1}{2}Cv^2 = \frac{q^2}{2C}
+\end{equation*}
+
+When adding capacitors in \textbf{series}:
+\begin{equation*}
+  C_{eq} = \left(\sum_{n=1}^{N} C_{n}^{-1}\right)^{-1}
+\end{equation*}
+When adding capacitors in \textbf{parallel}:
+\begin{equation*}
+  C_{eq} = \sum_{n=1}^{N} C_n
+\end{equation*}
+
+Lastly, capacitors:
+\begin{enumerate}
+  \itemsep0em
+  \item Function as open circuits under DC conditions
+    \begin{equation*}
+      \frac{dv}{dt}=0 \rightarrow i = C \frac{dv}{dt} \rightarrow i = C \cdot 0 \rightarrow i = 0
+    \end{equation*}
+  \item Voltage across a capacitor cannot change abruptly
+    \begin{equation*}
+      \frac{dv}{dt}=\infty \rightarrow i = \infty \rightarrow \textup{not possible}
+    \end{equation*}
+  \item An ideal capacitor does \textbf{not} dissipate energy
+\end{enumerate}
+
+\subsection{Inductors}
+\label{ssec:inductors}
+
+An inductor is a passive element designed to store energy. This effect is generally achieved by coiling wire into a cylindrical shape.
+
+\begin{definition}{Inductor}
+  An inductor is a passive, two-terminal, electrical component that stores energy in a magnetic field when an electric current flows through it.
+\end{definition}
+
+When current passes through an inductor, the voltage across the inductor is directly proportional to the \textbf{rate of change} of the current. Thus:
+\begin{formula}{Voltage Across an Inductor}
+  \begin{equation*}
+    v = L \frac{di}{dt}
+  \end{equation*}
+\end{formula}
+where $v$ is the voltage across the inductor, $L$ is the inductance of the inductor, and $\frac{di}{dt}$ is the rate of change of the current flowing through the inductor.
+
+\subsubsection{Inductance}
+\label{sssec:inductance}
+
+\begin{definition}{Inductance}
+  Inductance is a property that describes how much an inductor opposes a change in current flowing through it. It is measured in Henrys ($\si{H}$).
+\end{definition}
+
+The inductance of an inductor, similar to the capacitance of a capacitor, is determined by the physical properties of the inductor. Specifically, it is dependent on the cross-sectional area ($A$), number of turns/coils ($N$), length of the wire ($l$), and the permeability of the core ($\mu$).
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_011}
+  \caption{Physical Properties of an Inductor}
+  \label{fig:011}
+\end{figure}
+
+\begin{formula}{Inductance}
+  \begin{equation*}
+    L = \frac{N^2 \mu A}{l}
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Types of Inductors}
+\label{sssec:typesOfInductors}
+
+\begin{wrapfigure}[3]{r}{0.4\textwidth}
+  \vspace{-20pt}
+  \centering
+  \begin{subfigure}[H]{0.20\textwidth}
+    \centering
+    \includestandalone{figures/fig_012}
+    \caption{Fixed Value Inductor}
+    \label{fig:012}
+  \end{subfigure}
+  \begin{subfigure}[H]{0.18\textwidth}
+    \centering
+    \includestandalone{figures/fig_013}
+    \caption{Variable Inductor}
+    \label{fig:013}
+  \end{subfigure}
+  \caption{Types of Inductors}
+  \label{fig:typesOfInductors}
+\end{wrapfigure}
+
+Similar to capacitors, various types of inductors exist. They are described in terms of 1) their core (the material the coil is wrapped around), and 2) whether they are fixed value of variable. The core of the inductor is outside the scope of this course, but whether an inductor is fixed or variable still may be relevant.
+
+\subsubsection{Voltage and Current Across an Inductor}
+\label{sssec:voltageAndCurrentAcrossAnInductor}
+
+Recall the formula from Subsection \ref{ssec:inductors}:
+\begin{equation*}
+  v = L \frac{di}{dt}
+\end{equation*}
+using this, the current-voltage relationship can be derived:
+\begin{equation*}
+  \left[v = L \frac{di}{dt}\right] \rightarrow \left[ di = \frac{1}{L}v\, dt \right] \rightarrow \left[ i = \frac{1}{L} \int_{-\infty}^{t} v(\tau) \, d \tau \right]
+\end{equation*}
+which can be rewritten to give the general relationship between the current flowing through an inductor and the voltage across it:
+\begin{formula}{Current-Voltage Relationship of an Inductor}
+  \begin{equation*}
+    i = \frac{1}{L} \int_{t_0}^{t} v(\tau) \,d \tau + i(t_0)
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Energy Stored in an Inductor}
+\label{sssec:energyStoredInAnInductor}
+
+Again, returning to the previous equation from Subsection \ref{ssec:inductors}:
+\begin{equation*}
+  v = L \frac{di}{dt}
+\end{equation*}
+the power delivered to an inductor can be shown to be:
+\begin{equation*}
+  p = {\color{re} v}{\color{gr} i} = {\color{re} L \frac{di}{dt}}{\color{gr} i}
+\end{equation*}
+and then by integrating both sides, the accumulated energy stored in the inductor is:
+\begin{equation*}
+  w = \int_{-\infty}^{t} p(\tau) \,d \tau = L \int_{-\infty}^{t} i\frac{di}{d \tau} \,d \tau = L \int_{-\infty}^{t} i \,di = \left[ \frac{1}{2}Li(\tau)^2 \right]_{-\infty}^{t}
+\end{equation*}
+Since $i(-\infty) = 0$:
+\begin{formula}{Energy Stored in an Inductor}
+  \begin{equation*}
+    w = \frac{1}{2}Li^2
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Inductors in Series and Parallel}
+\label{sssec:inductorsInSeriesAndParallel}
+
+Consider the circuit in Figure \ref{fig:014}. Using KCL, the current in the circuits can be equated as:
+\begin{equation*}
+  i = i_1 + i_2 + i_3 + \hdots + i_n
+\end{equation*}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[H]{0.6\textwidth}
+    \centering
+    \includestandalone{figures/fig_014}
+    \caption{Original Circuit}
+    \label{fig:014}
+  \end{subfigure}
+  \begin{subfigure}[H]{0.3\textwidth}
+    \centering
+    \includestandalone{figures/fig_015}
+    \caption{Simplified Circuit}
+    \label{fig:015_2}
+  \end{subfigure}
+  \caption{Inductors in Parallel}
+  \label{fig:inductorsInParallel}
+\end{figure}
+
+Then, using the current-voltage relationship of an inductor:
+\begin{equation*}
+  i = \frac{1}{L} \int_{t_0}^{t} v \,dt + i(t_0)
+\end{equation*}
+the equation can be rewritten as:
+\begin{align*}
+  i = \frac{1}{L_1}\int_{t_0}^{t} v \,dt + i_1(t_0) + \frac{1}{L_2}\int_{t_0}^{t} v \,dt + i_2(t_0) + \frac{1}{L_3}\int_{t_0}^{t} v \,dt + i_3(t_0) + \hdots + \frac{1}{L_n}\int_{t_0}^{t} v \,dt + i_n(t_0)
+\end{align*}
+Since the voltage $v$ across all inductors is the same (all in parallel), the equation can be simplified into:
+\begin{equation*}
+  i = \left(\sum_{n=1}^{N} \frac{1}{L_n}\right) \int_{t_0}^{t} v \,dt + \left( \sum_{n=1}^{N} i_n(t_0) \right) = \left(\frac{1}{L_{eq}}\right) \int_{t_0}^{t} v \,dt + i(t_0)
+\end{equation*}
+thus showing that:
+\begin{formula}{Inductors in Parallel}
+  \begin{equation*}
+    L_{eq} = \left( L_{1}^{-1} + L_{2}^{-1} + L_{3}^{-1} + \hdots + L_{n}^{-1} \right)^{-1} = \left( \sum_{n=1}^{N} L_{n}^{-1} \right)^{-1}
+  \end{equation*}
+\end{formula}
+
+Now, consider the circuit in Figure \ref{fig:inductorsInSeries}:
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.6\textwidth}
+    \centering
+    \includestandalone{figures/fig_016}
+    \caption{Original Circuit}
+    \label{fig:016}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includestandalone{figures/fig_015}
+    \caption{Simplified Circuit}
+    \label{fig:015}
+  \end{subfigure}
+  \caption{Inductors in Series}
+  \label{fig:inductorsInSeries}
+\end{figure}
+
+Using KVL in the circuit, the following equation can be established:
+\begin{equation*}
+  v = v_1 + v_2 + v_3 + \hdots + v_n
+\end{equation*}
+then, by using the formula for the voltage across an inductor from Subsection \ref{ssec:inductors}:
+\begin{equation*}
+  v = L_1\frac{di}{dt} + L_2\frac{di}{dt} + L_3\frac{di}{dt} + \hdots + L_n\frac{di}{dt}
+\end{equation*}
+since all inductors are in series, the current flowing through each is the same. Thus, the equation can be rewritten to:
+\begin{equation*}
+  v = \left(L_1 + L_2 + L_3 + \hdots + L_n\right) \frac{di}{dt} = \left(\sum_{n=1}^{N} L_n\right) \frac{di}{dt} = L_{eq} \frac{di}{dt}
+\end{equation*}
+thus showing that:
+\begin{formula}{Inductors in Series}
+  \begin{equation*}
+    L_{eq} = (L_1 + L_2 + L_3 + \hdots + L_n) = \sum_{n=1}^{N} L_n
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Important Properties of a Inductor}
+\label{sssec:importantPropertiesOfAInductor}
+
+Returning once more to the voltage equation for a capacitor from Subsection \ref{ssec:inductors}:
+\begin{equation*}
+  v = L \frac{di}{dt}
+\end{equation*}
+When there is no current flowing through an inductor, it acts as a short circuit since there is no voltage drop across it. In other words, \textbf{an inductor is a short circuit in DC conditions}.
+
+Furthermore, since the rate of change of the current flowing through it determines the voltage, an inductor is naturally resistant to instantaneous changes in current. This is because an instantaneous change in current would require an infinite voltage. Thus, \textbf{current flowing through an inductor cannot change instantaneously}.
+
+Lastly, an \textbf{ideal inductor does not dissipate energy}. The energy stored in it remains indefinitely to be used later. The inductor only draws power when "charging" and only delivers power when returning the previously drawn energy.
+
+\subsubsection{Summary of Inductors}
+\label{sssec:summaryOfInductors}
+
+In summary, an inductor stores energy in its coils from a circuit and can provide a voltage. The voltage in an inductor is:
+\begin{equation*}
+  v = L \frac{di}{dt}
+\end{equation*}
+where $L$ is the inductance of the inductor, proportional to the area of the cross-section of the coil ($A$), number of coils ($N$), length of the coil ($l$), and the permeability of the core ($\mu$):
+\begin{equation*}
+  L = \frac{N^2 \mu A}{l}
+\end{equation*}
+The relationship between the voltage and current across an inductor can be expressed as:
+\begin{equation*}
+  i = \frac{1}{L} \int_{t_0}^{t} v(\tau) \,d \tau + i(t_0)
+\end{equation*}
+The energy stored in an inductor is:
+\begin{equation*}
+  w = \frac{1}{2}Li^2
+\end{equation*}
+
+When adding inductors in \textbf{series}:
+\begin{equation*}
+  L_{eq} = \sum_{n=1}^{N} L_n
+\end{equation*}
+When adding inductors in \textbf{parallel}:
+\begin{equation*}
+  L_{eq} = \left(\sum_{n=1}^{N} L_{n}^{-1}\right)^{-1}
+\end{equation*}
+
+Lastly, inductors
+\begin{enumerate}
+  \itemsep0em
+  \item Function as short circuits under DC conditions
+    \begin{equation*}
+      \frac{di}{dt}=0 \rightarrow v = L \frac{di}{dt} \rightarrow v = L \cdot 0 \rightarrow v = 0
+    \end{equation*}
+  \item Current across an inductor cannot change abruptly
+    \begin{equation*}
+      \frac{di}{dt}=\infty \rightarrow v = \infty \rightarrow \textup{not possible}
+    \end{equation*}
+  \item An ideal inductor does \textbf{not} dissipate energy
+\end{enumerate}
+
+\subsection{Applications}
+\label{ssec:applicationsOfCapacitorsAndInductors}
+
+While capacitors and inductors have different applications, they share some properties that make them both very useful:
+\begin{enumerate}
+  \itemsep0em
+  \item Both can store energy, making them useful as quick sources of high voltage/current
+  \item Capacitors and inductors resist instantaneous changes in voltage and current respectively making them useful for smoothing out circuits
+\end{enumerate}
+Capacitors and inductors have countless applications. However, there are two fundamental applications that be implemented with the help of op-amps: integrators and differentiators.
+
+\subsubsection{Integrator}
+\label{sssec:integrator}
+
+Recall the configuration of a simple inverting amplifier as shown in Figure \ref{fig:017}. An integrator circuit is incredibly similar, with the only difference being that the resistor $R_f$ is replaced with a capacitor. With this simple change, an integrator circuit is constructed.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[H]{0.45\textwidth}
+    \centering
+    \includestandalone{figures/fig_017}
+    \caption{Inverting Amplifier}
+    \label{fig:017}
+  \end{subfigure}
+  \begin{subfigure}[H]{0.45\textwidth}
+    \centering
+    \includestandalone{figures/fig_018}
+    \caption{Integrator}
+    \label{fig:018}
+  \end{subfigure}
+  \caption{From Inverting Amplifier to Integrator}
+  \label{fig:fromInvertingAmplifierToIntegrator}
+\end{figure}
+
+\begin{definition}{Integrator}
+  An integrator is an op-amp circuit whose output is proportional to the integral of the input signal.
+\end{definition}
+
+But how does this circuit integrate the input voltage? Consider the circuit in Figure \ref{fig:019}.
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_019}
+  \caption{Integrator}
+  \label{fig:019}
+\end{figure}
+
+Applying KCL at $v_N$, the following equation can be created. Note that the current flowing from $v_N$ is zero:
+\begin{equation*}
+  i_R = i_C
+\end{equation*}
+The currents across $R_1$ and $C$ respectively are:
+\begin{equation*}
+  i_R = \frac{v_i - v_N}{R_1}\textup{;}\ \ \ i_C = -C \frac{dv_o}{dt}
+\end{equation*}
+Thus, the previous equation can be rewritten as:
+\begin{equation*}
+  \left[\frac{{\color{or} v_i} - {\color{re} v_N}}{{\color{ma} R_1}} = -{\color{gr} C} \frac{{\color{ye} dv_o}}{{\color{bl} dt}}\right] \rightarrow \left[ -\frac{{\color{or} v_i} - {\color{re} 0}}{{\color{gr} C}{\color{ma} R_1}}{\color{bl} dt} = {\color{ye} dv_o} \right] \rightarrow \left[ -\frac{1}{{\color{gr} C}{\color{ma} R_1}} {\color{or} v_i} {\color{bl} dt} = {\color{ye} dv_o} \right]
+\end{equation*}
+Then, by integrating both sides:
+\begin{equation*}
+  \left[\int_{0}^{t} dv_o = -\frac{1}{CR_1} \int_{0}^{t} v_i \,dt\right] \rightarrow \left[ v_o(t)-v_o(0) = -\frac{1}{CR_1} \int_{0}^{t} v_i \,dt \right]
+\end{equation*}
+Assuming that the capacitor is fully discharged at $t=0$, then $v_o(0) = 0$ and the equation for the integrator circuit is:
+\begin{formula}{Integrator Voltage}
+  \begin{equation*}
+    v_o(t) = -\frac{1}{CR_1} \int_{0}^{t} v_i \,dt
+  \end{equation*}
+\end{formula}
+
+\begin{wrapfigure}[]{r}{0.4\textwidth}
+  \vspace{-20pt}
+  \centering
+  \includestandalone{figures/fig_020}
+  \caption{Practical Integrator}
+  \label{fig:020}
+\end{wrapfigure}
+
+While the circuit in Figure \ref{fig:019} is a functional integrating circuit, it is not fully practical. As described in Subsubsection \ref{sssec:importantPropertiesOfACapacitor}, a capacitor functions as an open circuit under DC conditions. So, if some DC voltage were to be applied at $v_i$, the feedback through the capacitor would become open and the op-amp would function as a comparator. To remedy this, it is common practice to connect a resistor in parallel with the capacitor as in Figure \ref{fig:020}.
+
+\clearpage
+\subsubsection{Differentiator}
+\label{sssec:differentiator}
+
+To construct a differentiator, simply swapping the resistor and capacitor from the integrator circuit is sufficient. Thus, Figure \ref{fig:021} shows the basic construction of a differentiator.
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_021}
+  \caption{Differentiator}
+  \label{fig:021}
+\end{figure}
+
+\begin{definition}{Differentiator}
+  An differentiator is an op-amp circuit whose output is proportional to the rate of change (derivative) of the input signal.
+\end{definition}
+
+But how does this circuit differentiate the input voltage? Consider the circuit in Figure \ref{fig:022}.
+
+\begin{figure}[H]
+  \centering
+  \includestandalone{figures/fig_022}
+  \caption{Differentiator}
+  \label{fig:022}
+\end{figure}
+
+Applying KCL at $v_N$:
+\begin{equation*}
+  i_R = i_C
+\end{equation*}
+The currents $i_R$ and $i_C$ are:
+\begin{equation*}
+  i_R = \frac{0-v_o}{R}\textup{;}\ \ \ i_C = C \frac{dv_i}{dt}
+\end{equation*}
+Meaning that the previous equation can be rewritten as:
+\begin{equation*}
+  \left[ \frac{0 {\color{ye} -} {\color{re} v_o}}{{\color{gr} R}} = {\color{bl} C} \frac{{\color{ma} dv_i}}{{\color{or} dt}} \right] \rightarrow \left[ {\color{re} v_o} = {\color{ye} -}{\color{gr} R}{\color{bl} C} \frac{{\color{ma} dv_i}}{{\color{or} dt}} \right]
+\end{equation*}
+Thus, the output is shown to be the derivative of the input amplified by $-RC$:
+\begin{formula}{Differentiator Output Signal}
+  \begin{equation*}
+    v_o = -RC \frac{dv_i}{dt}
+  \end{equation*}
+\end{formula}
+
+\end{document}

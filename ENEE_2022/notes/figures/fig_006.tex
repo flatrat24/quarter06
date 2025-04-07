@@ -1,0 +1,52 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 006}
+\date{April 03, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+    scale = 0.75,
+    axis lines = left,
+    thick,
+    ylabel = Voltage ($v$),
+    xlabel = Time ($t$),
+    xticklabels = {},
+    yticklabels = {},
+    xmax = 11,
+    ymax = 11
+    ]
+
+    \addplot [domain=1:2] {-4};
+
+    \addplot [
+      domain=0:2,
+      samples=10,
+      color=bl,
+      thick
+    ] {2};
+    \addplot [
+      domain=2:4,
+      samples=10,
+      color=bl,
+      thick
+    ] {(2*x)-2};
+    \addplot [
+      domain=4:8,
+      samples=10,
+      color=bl,
+      thick
+    ] {(-2*x)+14};
+    \addplot [
+      domain=8:10,
+      samples=10,
+      color=bl,
+      thick,
+      ->
+    ] {-2};
+    
+  \end{axis}
+
+\end{tikzpicture}
+\end{document}

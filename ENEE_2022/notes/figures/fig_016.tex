@@ -1,0 +1,30 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 016}
+\date{April 04, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+
+  \draw[wire] (0,0)
+    to[V,l=$v$] ++(0,2)
+    to[inductor,l_=$L_1$] ++(2,0)
+    to[inductor,l_=$L_2$] ++(2,0)
+    to[inductor,l_=$L_3$] ++(2,0);
+
+  \draw[wire, dotted] (6,2)
+    to[short] ++(1,0);
+
+  \draw[wire] (7,2)
+    to[inductor,l_=$L_n$] ++(2,0)
+    to[short] ++(0,-2)
+    to[short] ++(-9,0);
+
+  \draw[draw=bg, thick, -stealth] (0.5,3) node[anchor=north] {$+$} -- node[anchor=north] {$v_1$} ++(1,0) node[anchor=north] {$-$};
+  \draw[draw=bg, thick, -stealth] (2.5,3) node[anchor=north] {$+$} -- node[anchor=north] {$v_2$} ++(1,0) node[anchor=north] {$-$};
+  \draw[draw=bg, thick, -stealth] (4.5,3) node[anchor=north] {$+$} -- node[anchor=north] {$v_3$} ++(1,0) node[anchor=north] {$-$};
+  \draw[draw=bg, thick, -stealth] (7.5,3) node[anchor=north] {$+$} -- node[anchor=north] {$v_n$} ++(1,0) node[anchor=north] {$-$};
+
+\end{tikzpicture}
+\end{document}

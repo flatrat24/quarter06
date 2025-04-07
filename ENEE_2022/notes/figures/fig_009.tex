@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 008}
+\date{April 03, 2025}
+
+\begin{document}
+\begin{circuitikz}
+  \draw[wire] (0,0)
+  to[short] ++(2,0)
+  to[C] ++(0,-2)
+  to[short] ++(-2,0)
+  to[I,l=$i$] ++(0,2);
+
+  \draw[fg] (2,-1.5) node[anchor=east] {$C_{eq}$};
+
+  \draw[draw=bg] (3,-0.5) node[anchor=east] {$+$} -- node[anchor=east] {$v$} ++(0,-1) node[anchor=east] {$-$};
+\end{circuitikz}
+\end{document}

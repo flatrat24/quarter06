@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 014}
+\date{April 04, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+  \draw[wire] (0,0)
+  to[short] ++(2,0)
+  to[inductor,l_=$L_{eq}$] ++(0,-2)
+  to[short] ++(-2,0)
+  to[I,l=$i$] ++(0,2);
+
+  % \draw[fg] (2,-1.5) node[anchor=east] {$L_{eq}$};
+
+  \draw[draw=bg] (3,-0.5) node[anchor=east] {$+$} -- node[anchor=east] {$v$} ++(0,-1) node[anchor=east] {$-$};
+\end{tikzpicture}
+\end{document}

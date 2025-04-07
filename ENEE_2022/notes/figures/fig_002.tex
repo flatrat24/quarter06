@@ -1,0 +1,18 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 002}
+\date{April 03, 2025}
+
+\begin{document}
+\begin{circuitikz}
+
+  \draw[wire] (0,0)
+  to[V] ++(2,0)
+  to[short] ++(0,2) node[anchor=south east, xshift=-5pt] {$+$}
+  to[C] ++(-2,0) node[anchor=south west, xshift=5pt] {$-$}
+  to[short] ++(0,-2)
+  ;
+
+\end{circuitikz}
+\end{document}

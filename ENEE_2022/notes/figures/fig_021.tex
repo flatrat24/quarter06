@@ -1,0 +1,26 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 021}
+\date{April 05, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+
+  \ctikzset{label/align=rotate}
+  \coordinate (a) at (0,0);
+
+  \draw[fg, thick] ($(a)+(6,1)$) node[op amp] (oa1) {};
+  % (oa1.up) -- ++(0,0.5) node[vcc]{$+15 \,\si{V}$}
+  % (oa1.down) -- ++(0,-0.5) node[vee] {$-15 \,\si{V}$};
+
+  \draw[fg, thick] (oa1.out) to[short, -*] ++(1,0) node[anchor=west] {$v_o$};
+
+  \draw[fg, thick] (oa1.-) to[C, *-*, l_=$C$] ++(-2,0) node[anchor=east] {$v_i$};
+
+  \draw[fg, thick] (oa1.+) -- ++(-1,0) node[ground] {};
+
+  \draw[fg, thick] (oa1.out) to[short, *-] ++(0,1.5) to[R, l_=$R_f$] ++(-2.25,0) -| (oa1.-);
+
+\end{tikzpicture}
+\end{document}

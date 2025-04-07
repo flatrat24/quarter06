@@ -1,0 +1,24 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 027}
+\date{April 06, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+
+  \draw[wire] (0,0)
+    to[L,l_=$L$] ++(0,2)
+    to[short] ++(2,0)
+    to[R,l_=$R$] ++(0,-2)
+    to[short, -o] ++(-2,0) node[ground] {}
+    ;
+
+  \draw[draw=bg] (-0.25,1.5) node[anchor=east] {$-$} -- node[midway,anchor=east] {$v_L$} ++(0,-1) node[anchor=east] {$+$};
+  \draw[draw=bg] (2.95,1.5) node[anchor=east] {$+$} -- node[midway,anchor=east] {$v_R$} ++(0,-1) node[anchor=east] {$-$};
+
+  \draw[wire, ->] (0.5,2.25) -- node[midway,anchor=south] {$i$} ++(1,0);
+  % \draw[wire, ->] (1.65,1.5) -- ++(0,-1) node[anchor=east] {$i_R$};
+
+\end{tikzpicture}
+\end{document}

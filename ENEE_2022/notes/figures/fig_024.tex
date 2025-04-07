@@ -1,0 +1,18 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 024}
+\date{April 06, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+
+  \draw[wire] (0,0)
+    to[C] ++(0,2)
+    to[short] ++(2,0)
+    to[R] ++(0,-2)
+    to[short, -o] ++(-2,0) node[ground] {}
+    ;
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 006}
+\date{April 03, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+    axis lines = left,
+    thick,
+    xlabel = Change in Voltage ($\frac{dV}{dt}$),
+    ylabel = Current ($I$),
+    xticklabels = {},
+    yticklabels = {},
+    xmax = 11,
+    ymax = 11
+    ]
+
+    \addplot [
+      domain=0:10,
+      samples=10,
+      color=bl,
+      thick,
+      ->
+    ] {x};
+    
+  \end{axis}
+
+\end{tikzpicture}
+\end{document}
