@@ -133,7 +133,7 @@
     opacityback=0,
     sharp corners,
     sidebyside,
-    righthand width=18px,
+    righthand width=25px,
     coltext={fg}
     ]
     \centering
@@ -213,14 +213,13 @@
   wire/.style = {
     draw = fg,
     thick
-  }
-
+  },
   % Mechanical Engineering
   body/.style = {
     fill = bl!25!bg,
     draw = fg,
     thick,
-    fill opacity = 0.8
+    fill opacity = 0.95
   },
   force/.style = {
     draw = re,
@@ -244,11 +243,11 @@
 }
 
 \pgfplotsset{
-  basicAxis/.style={
+  axis/.style={
     grid,
     major grid style={line width=.2pt,draw=fg!50!bg},
     axis lines = box,
-    axis line style = {line width = 1px},
+    axis line style = {line width = 1px}
   }
 }
 
