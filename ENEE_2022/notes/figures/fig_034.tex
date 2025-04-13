@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 027}
+\date{April 06, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+
+  \draw[wire] (0,0)
+    to[L,l_=$L$] ++(0,2)
+    to[short] ++(2,0)
+    to[R,l_=$R$] ++(0,-2)
+    to[short, -o] ++(-2,0)
+    ;
+
+
+\end{tikzpicture}
+\end{document}

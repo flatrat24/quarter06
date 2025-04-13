@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 028}
+\date{April 12, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+
+  \draw[wire] (0,0)
+    to[V,l=$V_s$] ++(0,2)
+    to[R,l=$R$] ++(2,0)
+    to[C,l=$C$] ++(0,-2)
+    to[nos] ++(-2,0)
+    ;
+
+  \draw[draw=bg] (1.65,1.5) node[anchor=east] {$+$} -- node[midway,anchor=east] {$v_C$} ++(0,-1) node[anchor=east] {$-$};
+
+\end{tikzpicture}
+\end{document}

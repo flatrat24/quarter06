@@ -1,0 +1,21 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 029}
+\date{April 12, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+
+  \draw[wire] (0,0)
+    to[V] ++(0,2)
+    to[R] ++(2,0)
+    to[C] ++(0,-2)
+    to[ncs] ++(-2,0)
+    ;
+
+  \draw[wire,->] (1.45,0.5) -- node[midway,anchor=east] {$i_C$} ++(0,1);
+  \draw[wire,->] (0.5,2.35) -- node[midway,anchor=south] {$i_R$} ++(1,0);
+
+\end{tikzpicture}
+\end{document}

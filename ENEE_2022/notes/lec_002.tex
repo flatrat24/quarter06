@@ -43,11 +43,8 @@ An \textbf{RC Circuit} is a foundational circuit both for its simplicity as well
   An RC Circuit is a circuit comprising of a resistor (R) and a capacitor (C).
 \end{definition}
 
-\subsubsection{Source Free RC Circuit}
-\label{sssec:sourceFreeRCCircuit}
-
-\subsubsection{Voltage}
-\label{sssec:sfrccVoltage}
+\subsubsection{RC Circuit Without External Source}
+\label{sssec:rcCircuitWithoutExternalSource}
 
 Consider the circuit in Figure \ref{fig:025} where there is no independent voltage source connected in the circuit. There is only a capacitor and a resistor connected in series. Additionally, assume that the capacitor is initially charged (which is where the energy in the circuit will come from).
 
@@ -91,7 +88,7 @@ Considering that the capacitor in the circuit was initially charged, how will th
   \left[ v = Ae^{\frac{-t}{CR}} \right] \rightarrow \left[ v = V_{i}e^{\frac{-t}{CR}} \right]
 \end{equation*}
 This equations is the characteristic equation of a simple, source-free, RC Circuit. Notice the behavior of the equation; starting at $t=0$, the voltage in the circuit is initially $V_i$ and decays exponentially over time.
-\begin{formula}{Characteristic Equation of Source-Free RC Circuit}
+\begin{formula}{Natural Response of an RC Circuit}
   \begin{equation*}
     v = V_ie^{-\frac{t}{CR}} = V_ie^{-\frac{t}{\tau}}
   \end{equation*}
@@ -114,6 +111,11 @@ The voltage of the circuit can be graphed over time to visually see the behavior
   \caption{Voltage Response of the RC Circuit}
   \label{fig:026}
 \end{figure}
+
+Since all the behavior of the circuit discussed so far is the behavior of the circuit without external interference (some voltage or current source), this is considered the \textbf{natural response} of the circuit.
+\begin{definition}{Natural Response}
+  The natural response of a circuit refers to the behavior (in terms of voltages and currents) of the circuit itself, with no external sources of excitation.
+\end{definition}
 
 \subsubsection{Power and Energy}
 \label{sssec:sfrccPowerAndEnergy}
@@ -138,23 +140,116 @@ Notice that as $t \rightarrow \infty$, $w_R \rightarrow \frac{1}{2}CV_i^2$ which
   \end{equation*}
 \end{formula}
 
-Since all the behavior of the circuit discussed so far is the behavior of the circuit without external interference (some voltage or current source), this is considered the \textbf{natural response} of the circuit.
-\begin{definition}{Natural Response}
-  The natural response of a circuit refers to the behavior (in terms of voltages and currents) of the circuit itself, with no external sources of excitation.
+\subsubsection{RC Circuit with External Voltage Source}
+\label{sssec:rcCircuitWithExternalSource}
+
+In many cases, an RC Circuit won't exist without any external source supplying voltage to it. When an external source is applied at some time, the source can be modeled as a \textbf{step function}.
+
+\begin{definition}{Step Function}
+  A step function is a function that is low (zero) by default until some time $\alpha$ where it jumps to some high value. The \textit{unit} step function starts at zero and goes to one. Expressed with notation, it is:
+  \begin{equation*}
+    \mathcal{U}(t-\alpha) = \begin{cases}
+      0 ,&\ t < \alpha \\
+      1 ,&\ \alpha \leq 0
+    \end{cases}
+  \end{equation*}
 \end{definition}
 
-% \begin{figure}[H]
-%   \centering
-%   \includestandalone{figures/fig_023}
-%   \caption{First Order Circuit}
-%   \label{fig:023}
-% \end{figure}
+\begin{wrapfigure}[]{r}{0.5\textwidth}
+  \vspace{-15pt}
+  \centering
+  \begin{subfigure}[b]{0.23\textwidth}
+    \centering
+    \includestandalone{figures/fig_028}
+    \caption{$t<0$}
+    \label{fig:028}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.23\textwidth}
+    \centering
+    \includestandalone{figures/fig_029}
+    \caption{$t\geq0$}
+    \label{fig:029}
+  \end{subfigure}
+  \caption{RC Circuit with a Step Input}
+  \label{fig:rcCircuitWithAStepInput}
+\end{wrapfigure}
+
+Consider the circuit in Figure \ref{fig:rcCircuitWithAStepInput}. Applying KCL to the circuit, the following equation can be found:
+\begin{equation*}
+  {\color{re} i_C} + {\color{gr} i_R} = 0
+\end{equation*}
+or, through Ohm's law, it can be rewritten as:
+\begin{equation*}
+  \left[{\color{re} C\frac{dv}{dt}} + {\color{gr} \frac{v_C - V_s\mathcal{U}(t)}{R}} = 0\right] \rightarrow \left[\frac{dv}{dt} + \frac{v}{RC} = \frac{V_s \mathcal{U}(t)}{RC}\right]
+\end{equation*}
+Considering only time after the switch has been closed, $\mathcal{U}(t)=1$:
+\begin{equation*}
+  \left[\frac{dv}{dt} + \frac{v}{RC} = \frac{{\color{ma} V_s \mathcal{U}(t)}}{RC}\right] = \left[\frac{dv}{dt} + \frac{v}{RC} = \frac{{\color{ma} V_s}}{RC}\right]
+\end{equation*}
+then, further rearranging the equation and integrating:
+\begin{equation*}
+  \left[\frac{{\color{gr} dv}}{{\color{or} dt}} + \frac{{\color{bl} v}}{{\color{re} RC}} = \frac{{\color{bl} V_s}}{{\color{re} RC}}\right] \rightarrow \left[\frac{1}{{\color{bl} v-V_s}} {\color{gr} dv} = -\frac{1}{{\color{re} RC}} {\color{or} dt}\right] \rightarrow \int \rightarrow \left[\ln\left|v-V_s\right|=-\frac{t}{RC}\right]
+\end{equation*}
+What bounds are being integrated over? For $dt$, it would simply be from $t=0$ to $t=t$. For $dv$, the initial condition is whatever charge the capacitor had \textit{at} $t=0$: $v(0)=V_0$. The final condition is the charge of the capacitor at some time $t$: $v(t)$. Thus:
+\begin{equation*}
+  \Big[\ln\left|v-V_s\right|\Big]_{{\color{re} V_0}}^{{\color{gr} v(t)}} = \left[-\frac{t}{RC}\right]_{{\color{bl} 0}}^{{\color{or} t}}
+\end{equation*}
+which can be rearranged as:
+\begin{multline*}
+  \left[\ln|{\color{gr} v(t)}-V_s| - \ln|{\color{re} V_0}-V_s| = -\frac{{\color{or} t}}{RC} + \frac{{\color{bl} 0}}{RC}\right] \rightarrow \left[\ln\left|\frac{v(t)-V_s}{V_0-V_s}\right| = -\frac{t}{RC}\right] \\ \rightarrow e^x \rightarrow \left[\frac{v(t)-V_s}{{\color{pi} V_0-V_s}} = e^{-\frac{t}{RC}}\right] \rightarrow \left[v(t)-{\color{ma} V_s} = ({\color{pi} V_0-V_s})e^{-\frac{t}{RC}}\right] \rightarrow \left[v(t) = {\color{ma} V_s} + (V_0-V_s)e^{-\frac{t}{RC}}\right]
+\end{multline*}
+Recall that this is all during the interval of $t\geq0$, while before $t=0$, the capacitor had some arbitrary charge of $V_0$. Thus:
+\begin{equation*}
+  v(t) = \begin{cases}
+    V_0 ,&\ t < 0 \\
+    V_s + (V_0-V_s)e^{-\frac{t}{RC}} ,&\ 0 \leq t \\
+  \end{cases}
+\end{equation*}
+This equation models the \textbf{complete response} of the RC Circuit.
+ 
+\begin{formula}{Complete Response of an RL Circuit}
+  \begin{align*}
+    v(t) &= v(\infty) + \big[v(0)-v(\infty)\big]e^{-\frac{t}{\tau}} \\
+         &= V_ie^{-\frac{t}{\tau}} + V_s\left(1-e^{-\frac{t}{\tau}}\right) \\
+         &= \begin{cases}
+           V_0 ,&\ t < 0 \\
+           V_s + (V_0-V_s)e^{-\frac{t}{\tau}} ,&\ 0 \leq t \\
+         \end{cases}
+  \end{align*}
+\end{formula}
+
+This is because it incorporates both the \textit{natural} and \textit{forced} responses of the circuit. The natural response, as described earlier, is the behavior of the circuit due to the initial charge in the capacitor. The forced response is the behavior due to the external source applied to the circuit.
+
+\begin{definition}{Forced Response}
+  The forced response of a circuit refers to the behavior of the circuit as caused by the application of some external voltage or current source.
+\end{definition}
+
+A more conceptual way to view the equation is in terms of the natural response ($v_n$) and forced response ($v_f$) directly:
+\begin{equation*}
+  v(t) = v_n + v_f
+\end{equation*}
+where:
+\begin{equation*}
+  v_n = V_0e^{-\frac{t}{RC}};\ v_f = V_s\left(1-e^{-\frac{t}{RC}}\right)
+\end{equation*}
+Furthermore, a practical way to view the equation is:
+\begin{equation*}
+  v(t) = v(\infty) + \left[ v(0) - v(\infty) \right]e^{-\frac{t}{RC}}
+\end{equation*}
+where:
+\begin{equation*}
+  v(\infty) = \textup{final steady-state voltage}; v(0) = \textup{initial voltage}
+\end{equation*}
+which makes solving the circuit as straightforward as finding:
+\begin{enumerate}
+  \itemsep0em
+  \item $v(0)$: the initial voltage across the capacitor
+  \item $v(\infty)$: the final voltage across the capacitor
+  \item $\tau=RC$: the time constant of the circuit
+\end{enumerate}
 
 \subsection{RL Circuits}
 \label{ssec:rlCircuits}
-
-\subsubsection{Voltage}
-\label{sssec:sfrlcVoltage}
 
 An \textbf{RL Circuit} occupies a similar space in terms of its simplicity and popularity as the RC Circuit does. Functionally, the only difference is that the RL Circuit uses an inductor where the RC Circuit uses a capacitor.
 
@@ -162,8 +257,8 @@ An \textbf{RL Circuit} occupies a similar space in terms of its simplicity and p
   An RL Circuit is a circuit comprising of a resistor (R) and an inductor (L).
 \end{definition}
 
-\subsubsection{Source Free RL Circuit}
-\label{sssec:sourceFreeRLCircuit}
+\subsubsection{RL Circuit Without External Source}
+\label{sssec:rlCircuitWithoutExternalSource}
 
 Consider the circuit in Figure \ref{fig:027}. This circuit is a source free RL circuit seeing as there is an inductor in series with a resistor (RL circuit) and no voltage/current sources (source free).
 
@@ -239,5 +334,141 @@ Notice that as $t \rightarrow \infty$, $w_R \rightarrow \frac{1}{2}LI_i^2$ which
     w_L = \frac{1}{2}LI_i^2
   \end{equation*}
 \end{formula}
+
+\subsubsection{RL Circuit with External Voltage Source}
+\label{sssec:rlCircuitWithExternalSource}
+
+\begin{wrapfigure}[12]{r}{0.5\textwidth}
+  \vspace{-15pt}
+  \centering
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includestandalone{figures/fig_030}
+    \caption{$t<0$}
+    \label{fig:030}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includestandalone{figures/fig_031}
+    \caption{$t\geq0$}
+    \label{fig:031}
+  \end{subfigure}
+  \caption{RL Circuit with a Step Input}
+  \label{fig:rlCircuitWithAStepInput}
+\end{wrapfigure}
+
+Consider the circuit in Figure \ref{fig:rlCircuitWithAStepInput}. A process similar to the process detailed in Subsubsection \ref{sssec:rcCircuitWithExternalSource} can be done, starting with KVL applied to the circuit. However, rather than doing that, consider the equation:
+\begin{equation*}
+  i = {\color{ma} i_n} + {\color{or} i_f}
+\end{equation*}
+as determined in Subsubsection \ref{sssec:rlCircuitWithoutExternalSource}, the natural response ({\color{ma} $i_n$}) of an RL circuit is generally a decaying exponential:
+\begin{equation*}
+  {\color{ma} i_n} = Ce^{-\frac{t}{{\color{gr} \tau}}};\ {\color{gr} \tau} = \frac{L}{R}
+\end{equation*}
+and the final behavior of the circuit, when the inductor becomes a short circuit, will be:
+\begin{equation*}
+  {\color{or} i_f} = \frac{V_s}{R}
+\end{equation*}
+substituting back into the first equation:
+\begin{equation*}
+  i = {\color{ma} Ce^{-\frac{t}{\tau}}} + {\color{or} \frac{V_s}{R}}
+\end{equation*}
+What is the constant $C$? At $t=0$, the current equation for $i$ becomes:
+\begin{equation*}
+  \left[{\color{re} i} = Ce^{-\frac{{\color{gr} t}}{\tau}} + \frac{V_s}{R}\right] \rightarrow \left[{\color{re} I_0} = Ce^{-\frac{{\color{gr} 0}}{\tau}} + \frac{V_s}{R}\right] \rightarrow \left[{\color{re} I_0} = C + \frac{V_s}{R}\right] \rightarrow \left[C = I_0 - \frac{V_s}{R}\right]
+\end{equation*}
+\clearpage
+Then, substituting back into the equation:
+\begin{equation*}
+  \left[i = {\color{ma} C}e^{-\frac{t}{\tau}} + \frac{V_s}{R}\right] \rightarrow \left[i = \left({\color{ma} I_0-\frac{V_s}{R}}\right)e^{-\frac{t}{\tau}} + \frac{V_s}{R}\right]
+\end{equation*}
+Which now gives the \textbf{complete response} of the RL Circuit:
+\begin{formula}{Complete Response of an RL Circuit}
+  \begin{align*}
+    i(t) &= i(\infty) + \big[i(0)-i(\infty)\big]e^{-\frac{t}{\tau}} \\
+         &= I_ie^{-\frac{t}{\tau}} + I_s\left(1-e^{-\frac{t}{\tau}}\right) \\
+         &= \begin{cases}
+           I_0 ,&\ t < 0 \\
+           I_s + (I_0-I_s)e^{-\frac{t}{\tau}} ,&\ 0 \leq t \\
+         \end{cases}
+  \end{align*}
+\end{formula}
+Which again shows that solving such a circuit is as simple as finding:
+\begin{itemize}
+  \itemsep0em
+  \item $i(0)$: the initial current across the inductor
+  \item $i(\infty)$: the final current across the inductor
+  \item $\tau=\frac{L}{R}$: the time constant of the circuit
+\end{itemize}
+
+\subsection{Summary of First Order Circuits}
+\label{ssec:summaryOfFirstOrderCircuits}
+
+A first order circuit is one that contains a single inductor or capacitor, and is thus characterized by a first order differential equation. All the circuits in Figure \ref{fig:firstOrderCircuits} are first order circuits.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[H]{0.22\textwidth}
+    \centering
+    \includestandalone{figures/fig_032}
+  \end{subfigure}
+  \begin{subfigure}[H]{0.22\textwidth}
+    \centering
+    \includestandalone{figures/fig_033}
+  \end{subfigure}
+  \begin{subfigure}[H]{0.22\textwidth}
+    \centering
+    \includestandalone{figures/fig_034}
+  \end{subfigure}
+  \begin{subfigure}[H]{0.22\textwidth}
+    \centering
+    \includestandalone{figures/fig_035}
+  \end{subfigure}
+  \caption{First Order Circuits}
+  \label{fig:firstOrderCircuits}
+\end{figure}
+
+\subsubsection{RC Circuits}
+\label{sssec:rcCircuitsSummary}
+
+The time constant for an RC Circuit is:
+\begin{equation*}
+  \tau = RC
+\end{equation*}
+
+The natural response of an RC Circuit is:
+\begin{equation*}
+  v(t) = V_ie^{-\frac{t}{\tau}}
+\end{equation*}
+and the complete response of the RC Circuit is:
+\begin{align*}
+  v(t) &= v(\infty) + \big[v(0)-v(\infty)\big]e^{-\frac{t}{\tau}} \\
+       &= V_ie^{-\frac{t}{\tau}} + V_s\left(1-e^{-\frac{t}{\tau}}\right) \\
+       &= \begin{cases}
+         V_0 ,&\ t < 0 \\
+         V_s + (V_0-V_s)e^{-\frac{t}{\tau}} ,&\ 0 \leq t \\
+       \end{cases}
+\end{align*}
+
+\subsubsection{RL Circuits}
+\label{sssec:rlCircuitsSummary}
+The time constant for an RL Circuit is:
+\begin{equation*}
+  \tau = \frac{L}{R}
+\end{equation*}
+
+The natural response of an RL Circuit is:
+\begin{equation*}
+  i(t) = I_ie^{-\frac{t}{\tau}}
+\end{equation*}
+and the complete response of the RL Circuit is:
+\begin{align*}
+  i(t) &= i(\infty) + \big[i(0)-i(\infty)\big]e^{-\frac{t}{\tau}} \\
+       &= I_ie^{-\frac{t}{\tau}} + I_s\left(1-e^{-\frac{t}{\tau}}\right) \\
+       &= \begin{cases}
+         I_0 ,&\ t < 0 \\
+         I_s + (I_0-I_s)e^{-\frac{t}{\tau}} ,&\ 0 \leq t \\
+       \end{cases}
+\end{align*}
 
 \end{document}
