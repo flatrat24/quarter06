@@ -1,0 +1,288 @@
+\documentclass[12pt]{article}
+
+\input{../../xlatex/imports/preamble}
+
+\title{Lecture 004}
+\date{April 22, 2025}
+
+\begin{document}
+
+\newpage
+\section{Analysis Through the Laplace Transform}
+\label{sec:analysisThroughTheLaplaceTransform}
+
+As has been seen in previous sections, circuits with capacitors and inductors can be modeled by differential equations. Through solving these differential equations, the behavior of the circuit can be explained. However, this process is sometimes quite cumbersome and tedious.
+
+The method of using the \textbf{Laplace transform} can turn these differential equations into algebraic equations to solve, reducing the procedural bottleneck that the differential equations create.
+
+\subsection{Defining the Laplace Transform}
+\label{ssec:definingTheLaplaceTransform}
+
+\subsubsection{Laplace Transform}
+\label{sssec:laplaceTransform}
+
+\begin{formula}{Laplace Transform}\\
+  \vspace{10pt}
+  Given some function $f(t)$, the Laplace transform is defined as:
+  \begin{equation*}
+    \mathcal{L}\big\{f(t)\big\} = F(s) = \int_{0^-}^{\infty} f(t)e^{-st} \,dt
+  \end{equation*}
+  where $s$ is a complex variable given by:
+  \begin{equation*}
+    s = \sigma + j \omega
+  \end{equation*}
+\end{formula}
+
+Notice that, after its transformation, the function $f(t)$ becomes a new function $F(s)$, with a different independent variable. Whereas $f(t)$ functioned in the time domain ($t$-domain), the transformed function functions in the complex domain ($s$-domain). Thus, the Laplace transform can be understood as follows:
+
+\begin{definition}{Laplace Transform}
+  The Laplace transform is an integral transformation of a function $f(t)$ from the time domain into the complex frequency domain, giving $F(s)$.
+\end{definition}
+
+A function $f(t)$ may not always \textit{have} a Laplace transform. In order for $f(t)$ to have a Laplace transform, the integral in the Laplace transform:
+\begin{equation*}
+  \int_{0^-}^{\infty} f(t)e^{-st} \,dt
+\end{equation*}
+must converge to some finite value. Luckily, all functions used in circuit analysis properly satisfy this criteria, so it can be assumed that all functions used throughout this course have a Laplace transform.
+
+\subsubsection{Inverse Laplace Transform}
+\label{sssec:inverseLaplaceTransform}
+
+There also exists an inverse Laplace transform. Whereas the Laplace transform took a function in the time domain and returned a function in the complex domain, the inverse Laplace transform does the opposite. A function $F(s)$ can be inverse Laplace transformed into some other function $f(t)$.
+
+The inverse Laplace transform is even trickier to compute manually. For this reason, rather than relying on the definition given below, common Laplace and inverse Laplace transforms will be generalized into a table for reference.
+
+\begin{formula}{Inverse Laplace Transform}\\
+  \vspace{10pt}
+  Given some function $F(S)$, the inverse Laplace transform is defined as:
+  \begin{equation*}
+    \mathcal{L}^{-1}\big\{F(s)\big\} = f(t) = \frac{1}{2\pi j}\int_{\sigma_1 - j^{\infty}}^{\sigma_1 + j^{\infty}} F(s)e^{st} \,ds
+  \end{equation*}
+\end{formula}
+
+\subsection{Properties of the Laplace Transform}
+\label{ssec:propertiesOfTheLaplaceTransform}
+
+\subsubsection{Linearity}
+\label{sssec:linearity}
+
+For some real numbers $\alpha$ and $\beta$, consider the following Laplace Transform:
+\begin{equation*}
+  \mathcal{L}\big\{\alpha f(t) + \beta g(t)\big\}
+\end{equation*}
+By the definition of the Laplace Transform given in Subsection \ref{ssec:definingTheLaplaceTransform}:
+\begin{align*}
+  \mathcal{L}\big\{\alpha f(t) + \beta g(t)\big\} &= \int_{0}^{\infty} \big[ \alpha f(t) + \beta g(t) \big]e^{-st} \,dt \\
+                                                  &= \int_{0}^{\infty} \alpha f(t) e^{-st} + \beta g(t) e^{-st} \, dt \\
+                                                  &= \int_{0}^{\infty} \alpha f(t) e^{-st} \, dt + \int_{0}^{\infty} \beta g(t) e^{-st} \, dt \\
+                                                  &= \alpha \int_{0}^{\infty} f(t) e^{-st} \, dt + \beta \int_{0}^{\infty} g(t) e^{-st} \, dt \\
+                                                  &= \alpha \mathcal{L}\big\{ f(t) \big\} + \beta \mathcal{L}\big\{ g(t) \big\}
+\end{align*}
+Thus, it can be seen that, through the linearity of integrals, so too is the Laplace transform linear.
+\begin{formula}{Linearity}
+  \begin{equation*}
+    \mathcal{L}\big\{\alpha f(t) + \beta g(t)\big\} = \alpha \mathcal{L}\big\{ f(t) \big\} + \beta \mathcal{L}\big\{ g(t) \big\}
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Scaling}
+\label{sssec:scaling}
+
+For some real number $\alpha$ where $\alpha > 0$, consider:
+\begin{equation*}
+  \mathcal{L}\big\{f(\alpha t)\big\} = \int_{0^-}^{\infty} f(at)e^{-st} \,dt
+\end{equation*}
+If $x=\alpha t$, and consequently $dx = a\ dt$, then:
+\begin{equation*}
+  \mathcal{L}\big\{f(\alpha t)\big\} = \int_{0^-}^{\infty} f(x)e^{-s \frac{x}{a}} \,\frac{dx}{\alpha} = \frac{1}{\alpha} \int_{0^-}^{\infty} f(x)e^{-x \frac{s}{a}} \,dx
+\end{equation*}
+By comparing this current equation with the definition of the Laplace transform, it can be seen that:
+\begin{itemize}
+  \itemsep0em
+  \item $s$ must be replaced by $\frac{s}{\alpha}$: $s \mapsto \frac{s}{\alpha}$
+  \item $t$ is replaced by $x$: $t \mapsto x$
+\end{itemize}
+\begin{formula}{Scaling Property}
+  \begin{equation*}
+    \mathcal{L}\big\{f(\alpha t)\big\} = \frac{1}{\alpha}F\left(\frac{s}{\alpha}\right)
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Frequency Shift}
+\label{sssec:frequencyShift}
+Consider the Laplace Transform of:
+\begin{equation*}
+  \mathcal{L}\big\{e^{at}f(t)\big\}
+\end{equation*}
+This can be rewritten as:
+\begin{equation*}
+  \int_{0}^{\infty} e^{at}f(t)e^{-st} \,dt = \int_{0}^{\infty} f(t)e^{-(s-a)t} \, dt = F(s-a)
+\end{equation*}
+What this shows is that, when a function $f(t)$ is multiplied by an exponential function of $e^{at}$, the resulting Laplace Transform will be whatever the Laplace Transform of $f(t)$ is, with $s \mapsto s-a$.
+\begin{formula}{Frequency Shift}
+  \begin{equation*}
+    \mathcal{L}\big\{e^{at}f(t)\big\}=F(s-a)\ \ \ \textup{or}\ \ \ \mathcal{L}\big\{e^{at}f(t)\big\}=\mathcal{L}\big\{f(t)\big\}\Big\vert_{s\mapsto s-a}
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Time Shift}
+\label{sssec:timeShift}
+
+Considering some function shifted by some value $a$ with the unit step function:
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[H]{0.45\textwidth}
+    \centering
+    \includestandalone{figures/fig_036}
+    \caption{$y=f(t)$}
+    \label{fig:036}
+  \end{subfigure}
+  \begin{subfigure}[H]{0.45\textwidth}
+    \centering
+    \includestandalone{figures/fig_037}
+    \caption{$y=f(t-a)\mathcal{U}(t-a)$}
+    \label{fig:037}
+  \end{subfigure}
+\end{figure}
+The Laplace Transform of the function is:
+\begin{equation*}
+  \int_{{\color{re} 0}}^{\infty} f(t-a)\mathcal{U}(t-a)e^{-st} \,dt = \int_{{\color{re} a}}^{\infty} f(t-a)\mathcal{U}(t-a)e^{-st} \,dt
+\end{equation*}
+this equivalency is valid since, up until $t=a$, the value of the entire function is $0$ since the unit step function has yet to be "activated". Then, mapping $(t-a) \mapsto T$:
+\begin{equation*}
+  \int_{0}^{\infty} f(T)\mathcal{U}(T){\color{gr} e^{-s(T+a)}} \,dt = \int_{0}^{\infty} f(T){\color{re} \mathcal{U}(T)}{\color{gr} e^{-sT-sa}} \,dT = {\color{gr} e^{-sa}}\int_{0}^{\infty} f(T)\cdot{\color{re} 1}\cdot{\color{gr} e^{-sT}} \,dT = e^{-as}F(s)
+\end{equation*}
+Thus:
+\begin{equation*}
+  \mathcal{L}\left\{f(t-a)\mathcal{U}(t-a)\right\}=e^{-as}F(s)\ \ \ \textup{or}\ \ \ \mathcal{L}\left\{f(t)\mathcal{U}(t-a)\right\}=e^{-as}\mathcal{L}\left\{f(t+a)\right\}
+\end{equation*}
+
+\begin{formula}{Time Shift}
+  \begin{equation*}
+    \mathcal{L}\left\{f(t-a)\mathcal{U}(t-a)\right\}=e^{-as}F(s)
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Time Differentiation}
+\label{sssec:timeDifferentiation}
+
+If $f(t)$ is continuous on the interval $[0,\infty)$, of exponential order, and if $f'(t)$ is piecewise continuous on $[0,\infty)$, then:
+\begin{equation*}
+  \mathcal{L}\big\{f'(t)\big\} = s\mathcal{L}\big\{f(t)\big\} - f(0) = sF(s) - f(0)
+\end{equation*}
+
+To prove this, consider the following Laplace Transform:
+\begin{equation*}
+  \mathcal{L}\big\{f'(t)\big\} = \int_{0}^{\infty} f'(t)e^{-st} \,dt
+\end{equation*}
+Through integration by parts, this can be written as:
+\begin{align*}
+  \int_{0}^{\infty} f'(t)e^{-st} \,dt &= \big[f(t)e^{-st}\big]_{0}^{\infty} - \int_{0}^{\infty} -s \cdot f(t)e^{-st} \,dt \\
+                                      &= {\color{ma} \big[f(t)e^{-st}\big]_{0}^{\infty}} + s {\color{gr} \int_{0}^{\infty} f(t)e^{-st} \,dt} \\
+                                      &= {\color{ma} \left(\lim_{b \to \infty} f(b)e^{-sb} - f(0)e^0\right)} + s {\color{gr} F(s)}
+\end{align*}
+
+Under the assumption that $f(t)$ is of exponential order, for a sufficiently large value of $s$:
+\begin{equation*}
+  \lim_{t \to \infty} f(t)e^{-st} = 0
+\end{equation*}
+thus showing that:
+\begin{equation*}
+  \mathcal{L}\big\{f'(t)\big\} = \left({\color{or} \lim_{b \to \infty} f(b)e^{-sb} - f(0)e^0}\right) + {\color{bl} sF(s)} = {\color{bl} sF(s)} - {\color{or} f(0)}
+\end{equation*}
+
+This process of proof can be used to prove:
+\begin{align*}
+  \mathcal{L}\big\{f''(t)\big\} &= s^2F(s) - sf(0) - f'(0) \\
+  \mathcal{L}\big\{f'''(t)\big\} &= s^3F(s) - s^2f(0) - sf'(0) - f''(0) \\
+                                 &\vdots \\
+  \mathcal{L}\big\{f^{(n)}(t)\big\} &= s^nF(s) - s^{n-1}f(0) - s^{n-2}f'(0) - \hdots - f^{(n-1)}(0)
+\end{align*}
+Provided that, for the Laplace Transform of some derivative $f^{n}(t)$, $f^{n}(t)$ is piecewise continuous and all previous functions $\big[f(t),\ f'(t), \hdots\big]$ are continuous over $[0,\infty)$ and of exponential order. The Laplace of the $n^{th}$ derivative can also be expressed as:
+\begin{formula}{Time Differentiation}
+  \begin{equation*}
+    \mathcal{L}\big\{f^{(n)}(t)\big\} = s^nF(s) - \sum_{i=0}^{n-1} s^{n-1-i}f^{(i)}(0)
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Time Integration}
+\label{sssec:timeIntegration}
+
+Consider the Laplace transform of the integral of $f(t)$:
+\begin{equation*}
+  \mathcal{L}\left\{\int_{0}^{t} f(x) \,dx\right\} = \int_{0^-}^{\infty} \left[\int_{0}^{t} f(x) \,dx\right]e^{-st} \,dt
+\end{equation*}
+Integrating by parts:
+\begin{align*}
+  u = {\color{re} \int_{0}^{t} f(x) \,dx}&,\ \ du = {\color{gr} f(t)\ dt} \\
+  dv = {\color{bl} e^{-st}\ dt}          &,\ \ v = {\color{or} -\frac{1}{s}e^{-st}}
+\end{align*}
+Then:
+\begin{equation*}
+  \mathcal{L}\left\{\int_{0}^{t} f(x) \,dx\right\} = \left[\left[{\color{re} \int_{0}^{t} f(x) \,dx}\right]\left({\color{or} -\frac{1}{s}e^{-st}}\right)\right]_{0^-}^{\infty} - \int_{0^-}^{\infty} \left({\color{or} -\frac{1}{s}e^{-st}}\right){\color{gr} f(t) \,dt}
+\end{equation*}
+Evaluating the first term on the right side:
+\begin{equation*}
+  \left[\int_{0}^{t} f(x) \,dx\right]\left(-\frac{1}{s}e^{-st}\right)
+\end{equation*}
+at {\color{bl} $t=\infty$} and {\color{ye} $t=0$} both give zero since
+\begin{equation*}
+  \left[e^{-st}\right]_{{\color{bl} t \mapsto \infty}} = e^{-s(\infty)} = \frac{1}{e^{\infty}} = 0
+\end{equation*}
+and
+\begin{equation*}
+  \left[\int_{0}^{t} f(x) \,dx\right]_{{\color{ye} t \mapsto 0}} = \int_{0}^{0} f(x) \,dx = 0
+\end{equation*}
+thus, the first term is zero and the equation can be rewritten as:
+\begin{equation*}
+  \mathcal{L}\left\{\int_{0}^{t} f(x) \,dx\right\} = 0 - \int_{0^-}^{\infty} \left(-\frac{1}{s}e^{-st}\right)f(t) \,dt = \frac{1}{s}\int_{0^-}^{\infty} f(t)e^{-st} \,dt = \frac{1}{s}F(s)
+\end{equation*}
+thus showing the time integration of the Laplace transform.
+\begin{formula}{Time Integration}
+  \begin{equation*}
+    \mathcal{L}\left\{\int_{0}^{t} f(x) \,dx\right\} = \frac{1}{s}F(s)
+  \end{equation*}
+\end{formula}
+
+\subsubsection{Summary of the Properties of the Laplace Transform}
+\label{sssec:summaryOfThePropertiesOfTheLaplaceTransform}
+
+\begin{figure}[H]
+  \centering
+  \begin{tblr}{lcc}
+    \toprule
+    \textbf{Property} & \textbf{$f(t)$} & \textbf{$F(s)$} \\
+    \midrule
+    Linearity            & $\alpha f(t) + \beta g(t)$ & $\alpha \mathcal{L}\big\{ f(t) \big\} + \beta \mathcal{L}\big\{ g(t) \big\}$ \\
+    Scaling              & $f(\alpha t)$              & $\frac{1}{\alpha}F\left(\frac{s}{\alpha}\right)$ \\
+    Frequency Shift      & $e^{at}f(t)$               & $F(s-a)$ \\
+    Time Shift           & $f(t-a)\mathcal{U}(t-a)$   & $e^{-as}F(s)$ \\
+    Time Differentiation & $f^{(n)}(t)$               & $s^nF(s) - \sum_{i=0}^{n-1} \left[s^{n-1-i}f^{(i)}(0)\right]$ \\
+    Time Integration     & $\int_{0}^{t} f(x) \,dx$   & $\frac{1}{s}F(s)$ \\
+    \bottomrule
+  \end{tblr}
+\end{figure}
+
+\subsubsection{Common Laplace Transforms}
+\label{sssec:commonLaplaceTransforms}
+
+\begin{figure}[H]
+  \centering
+  \begin{tblr}{c|c}
+    \toprule
+    \textbf{Laplace} & \textbf{Inverse Laplace} \\
+    \midrule
+    $\mathcal{L}\big\{\delta(t)\big\} = 1$                                      & $\mathcal{L}^{-1}\big\{1\big\} = \delta(t)$ \\
+    $\mathcal{L}\big\{\mathcal{U}(t)\big\} = \frac{1}{s}$                       & $\mathcal{L}^{-1}\big\{\frac{1}{s}\big\} = \mathcal{U}(t)$ \\
+    $\mathcal{L}\big\{ t^n \big\} = \frac{n!}{s^{n+1}},\ s>0$                   & $\mathcal{L}^{-1}\left\{\frac{1}{s^n}\right\} = \frac{t^{n-1}}{(n-1)!}$                                                                    \\
+    $\mathcal{L}\big\{t^ne^{-\alpha t})\big\} = \frac{1}{(s+\alpha)^{n+1}}$     & $\mathcal{L}^{-1}\big\{\frac{1}{(s+\alpha)^{n}}\big\} = \frac{1}{(n-1)!}t^{n-1}e^{\alpha t}$ \\
+    $\mathcal{L}\big\{ e^{\alpha t} \big\} = \frac{1}{s- \alpha},\ s>\alpha$    & $\forall \alpha \in \mathbb{R},\ \mathcal{L}^{-1}\left\{\frac{1}{s-\alpha}\right\} = e^{\alpha t}$                                         \\
+    $\mathcal{L}\big\{\cos(\beta t) \big\} = \frac{s}{s^2 + \beta^2},\ s>0$     & $\forall \beta \in \mathbb{R},\ \beta > 0 \rightarrow \mathcal{L}^{-1}\left\{\frac{s}{s^2+\beta^2}\right\} = \cos(\beta t)$                \\
+    $\mathcal{L}\big\{\sin(\beta t) \big\} = \frac{\beta}{s^2 + \beta^2},\ s>0$ & $\forall \beta \in \mathbb{R},\ \beta > 0 \rightarrow \mathcal{L}^{-1}\left\{\frac{1}{s^2+\beta^2}\right\} = \frac{1}{\beta}\sin(\beta t)$ \\
+    $\mathcal{L}\big\{\cosh(kt) \big\} = \frac{s}{s^2 - k^2},\ s>k$             & $\forall k \in \mathbb{R},\ k > 0 \rightarrow \mathcal{L}^{-1}\left\{\frac{s}{s^2-k^2}\right\} = \cosh(kt)$                                \\
+    $\mathcal{L}\big\{\sinh(kt) \big\} = \frac{k}{s^2 - k^2},\ s>k$             & $\forall k \in \mathbb{R},\ k > 0 \rightarrow \mathcal{L}^{-1}\left\{\frac{1}{s^2-k^2}\right\} = \frac{1}{k}\sinh(kt)$                     \\
+    \bottomrule
+  \end{tblr}
+\end{figure}
+
+\end{document}

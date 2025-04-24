@@ -1,0 +1,16 @@
+\documentclass{standalone}
+\input{../../../xlatex/imports/preamble}
+
+\title{Figure 013}
+\date{March 06, 2025}
+
+\begin{document}
+\begin{tikzpicture}
+  \draw[fg, -stealth] (-0.5,0) -- ++(5.5,0);
+  \draw[fg, -stealth] (0,-0.5) -- ++(0,2.5);
+
+  \draw[bl, ultra thick, -stealth] plot[smooth, tension=0.9] coordinates { (0,1) (1,2.5) (2.5,1.5) (5,0.7) };
+
+  \draw[draw=bl, fill=bl] (0,1) circle (2pt);
+\end{tikzpicture}
+\end{document}
